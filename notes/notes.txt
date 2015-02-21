@@ -1,0 +1,62 @@
+PROJECT:
+
+A tool to help young people choose their major
+
+Visualize which fields of study map to which fields of employment and rate of employment, in which times / places.
+
+That comes down to:
+
+- display employment rate
+    - filter by industry sector, field of study, geo region, age, date, sex.
+
+Major things I want is what they studied and what industry they work in.
+
+
+
+DATA SOURCES:
+
+
+current place of residence, place of origin, field of study, employment status:
+http://open.canada.ca/data/en/dataset/f3180dad-d8ab-4974-acd3-cec17637540f
+- 99-012-X2011047
+
+
+
+place of residence, field of study, field of work, age, etc
+http://open.canada.ca/data/en/dataset/64874af2-467c-41a6-8bda-efe99cfa3a61
+- 99-012-X2011056
+- Occupation - National Occupational Classification (NOC) 2011 (693), Major Field of Study - Classification of Instructional Programs (CIP) 2011 (432), Highest Certificate, Diploma or Degree (10) and Age Groups (8C) for the Population Aged 15 Years and Over, in Private Households of Canada, Provinces and Territories, 2011 National Household Survey
+- aggregated by province / territory.
+
+
+
+http://open.canada.ca/data/en/dataset/7df905fb-f392-480c-a6ce-5e5850e13e2d
+- 99-012-X2011053
+- Occupation - National Occupational Classification (NOC) 2011 (11), Highest Certificate, Diploma or Degree (15), Major Field of Study - Classification of Instructional Programs (CIP) 2011 (82), Age Groups (13B) and Sex (3) for the Employed Labour Force Aged 15 Years and Over, in Private Households of Canada, Provinces, Territories and Census Divisions, 2011 National Household Survey
+- geo and other classification codes had to work with, hope for something better
+- much finer grained than data set above
+
+
+
+
+DATA QUALITY ISSUES:
+
+Structure Doc: Structure_99-012-X2011047
+Line 7001:
+
+Disclosure control rules have been applied to data tables ... subtotals will not necessarily aggregate to the total. As well ... random rounding has also been applied to the data.
+
+
+
+TECHNICAL CHALLENGES:
+
+- the data files are huge, up to 150GB
+- xml artificially inflates the size of the data set, need a sax parser
+
+
+PLAN OF ATTACK:
+
+- use a sax parse to go through the documents and dump to a csv file
+- dump csv file to db
+- build your app using sql statements on the db
+
