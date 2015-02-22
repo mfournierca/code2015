@@ -8,4 +8,4 @@
   sudo: True
 
 - name: create database tables
-  command: sudo -u {{ postgresql_admin_user }} psql -d {{ dbname }} -a -f /tmp/db_setup.sql
+  command: sudo -u {{ postgresql_admin_user }} psql -d {{ db_name }} -a -f /tmp/db_setup.sql
