@@ -6,5 +6,13 @@ nginx_vhost_template: nginx_vhost_template.txt
 db_name: code2015
 
 # postgresql module vars
+# postgresql module is found in ansible-common
 postgresql_admin_user: "postgres"
-postgresql_databases: [{"name": "{{ db_name }}" }]
+postgresql_users:
+    - name: app_user
+      pass: app_user_password
+postgresql_user_privileges:
+    - name: app_user
+      db: {{ db_name }}
+postgresql_databases:
+    name": {{ db_name }}
