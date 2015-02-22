@@ -1,0 +1,13 @@
+server {
+    server_name {{ nginx_server_name }};
+    root /var/www/{{ nginx_server_name }};
+
+    index index.html index.htm index.php;
+    autoindex off;
+    
+    location ~ \.php$ {
+        include fastcgi_params;
+        #fastcgi_pass unix:/tmp/phpfpm.sock;    #used in ubuntu 12.10 and up
+        fastcgi_pass 127.0.0.1:9000;            #used in ubuntu 12.04
+        }
+}

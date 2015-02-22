@@ -62,6 +62,8 @@ def parse(input_handle, output_handle):
             while elem.getprevious() is not None:
                 del elem.getparent()[0]
 
+            counter += 1
+
 
 def run(input_file, output_file):
 
