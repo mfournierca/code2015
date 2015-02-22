@@ -4,13 +4,26 @@ The legend is mapping between the different id values found in the data set and
 their plain-text equivalent.
 
 Usage:
-    python build_legend.py <structure_file> <output_file>
+    build_legend.py <structure_file> <output_file>
+
+Arguments:
+    <structure_file>  structure file that came with the dataset
+    <output_file>     output file for the legend
 """
 
 from lxml import etree
 from docopt import docopt
 
 from common import NAMESPACES
+
+
+TAG_MAPPING = {
+    "GEO": "location",
+    "CIP2011_4": "field_of_study",
+    "AGE": "age",
+    "NOC2011": "occupation",
+    "HCDD_14V": "education_level"
+}
 
 
 def _parse_codelist(document, codelist_id):
@@ -27,40 +40,25 @@ def _parse_codelist(document, codelist_id):
     return legend
 
 
-def parse_geo(document):
-    return _parse_codelist(document, "CL_GEO")
-
-
-def parse_field_of_study(document):
-    return _parse_codelist(document, "CL_CIP2011_4")
-
-
-def parse_age(d):
-    return _parse_codelist(d, "CL_AGE")
-
-
-def parse_occupation(d):
-    return _parse_codelist(d, "CL_NOC2011")
-
-
-def parse_education_level(d):
-    return _parse_codelist(d, "CL_HCDD_14V")
-
-
 def parse_document(d):
     legend = {
-        "location": parse_geo(d),
-        "field_of_study": parse_field_of_study(d),
-        "age_group": parse_age(d),
-        "occupation": parse_occupation(d),
-        "education_level": parse_education_level(d)
+        "GEO": _parse_codelist(d, "CL_GEO"),
+        "CIP2011_4": _parse_codelist(d, "CL_CIP2011_4"),
+        "AGE": _parse_codelist(d, "CL_AGE"),
+        "NOC2011": _parse_codelist(d, "CL_NOC2011"),
+        "HCDD_14V": _parse_codelist(d, "CL_HCDD_14V")
     }
     return legend
 
 
-def run(input_file, output_file):
-    doc = etree.parse(input_file)
+def parse_file(f):
+    doc = etree.parse(f)
     legend = parse_document(doc)
+    return legend
+
+
+def run(input_file, output_file):
+    legend = parse_file(input_file)
     with open(output_file) as f:
         f.write(str(legend))
 
