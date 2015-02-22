@@ -13,6 +13,6 @@ postgresql_users:
       pass: app_user_password
 postgresql_user_privileges:
     - name: app_user
-      db: {{ db_name }}
+      db: "{{ db_name }}"
 postgresql_databases:
-    name": {{ db_name }}
+    name": "{{ db_name }}"
