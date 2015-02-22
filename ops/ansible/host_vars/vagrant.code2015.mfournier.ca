@@ -1,2 +1,10 @@
+# nginx config
 nginx_server_name: vagrant.code2015.mfournier.ca
 nginx_vhost_template: nginx_vhost_template.txt
+
+# database config
+db_name: code2015
+
+# postgresql module vars
+postgresql_admin_user: "postgres"
+postgresql_databases: [{"name": "{{ db_name }}" }]

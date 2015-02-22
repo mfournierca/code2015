@@ -1,4 +1,11 @@
 ---
 
+- name: copy setup script
+  copy: src=db_setup.sql dest=/tmp/db_setup.sql
+
+- name: set permissions on setup script
+  file: path=/tmp/db_setup.sql owner={{ postgresql_admin_user }} mode="760"
+  sudo: True
+
 - name: create database tables
-  command: psql -s {{ dbname }} -c "create table data (id SERIAL, NOC2011 INT, CIP2011_4 INT,AGE INT, observation_value INT, HCDD_14V INT, time INT, GEO INT)"
+  command: sudo -u {{ postgresql_admin_user }} psql -d {{ dbname }} -a -f /tmp/db_setup.sql
