@@ -61,3 +61,9 @@ PLAN OF ATTACK:
 - dump csv file to db
 - build your app using sql statements on the db
 
+
+
+SNIPPETS
+
+load data:
+    sudo -u postgres psql -d code2015 -c "COPY data FROM '/vagrant/dump.csv' WITH CSV HEADER DELIMITER AS ',';"
