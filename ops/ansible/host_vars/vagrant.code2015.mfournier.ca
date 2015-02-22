@@ -5,6 +5,10 @@ nginx_vhost_template: nginx_vhost_template.txt
 # database config
 db_name: code2015
 
+# git
+git-repo: https://github.com/mfournierca/code2015.git
+git-branch: master
+
 # postgresql module vars
 # postgresql module is found in ansible-common
 postgresql_admin_user: "postgres"

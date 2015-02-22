@@ -67,3 +67,12 @@ SNIPPETS
 
 load data:
     sudo -u postgres psql -d code2015 -c "COPY data FROM '/vagrant/dump.csv' WITH CSV HEADER DELIMITER AS ',';"
+
+
+Top level categories add up:
+
+code2015=# SELECT SUM(observation_value) FROM data WHERE GEO=1 AND NOC2011=1 AND CIP2011_4=1 AND AGE=1 AND (HCDD_14V=2 OR HCDD_14V=3 OR HCDD_14V=4);
+   sum
+----------
+ 27259525
+(1 row)

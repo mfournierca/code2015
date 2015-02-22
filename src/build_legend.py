@@ -18,11 +18,11 @@ from common import NAMESPACES
 
 
 TAG_MAPPING = {
-    "GEO": "location",
-    "CIP2011_4": "field_of_study",
-    "AGE": "age",
-    "NOC2011": "occupation",
-    "HCDD_14V": "education_level"
+    "geo": "location",
+    "cip2011_4": "field_of_study",
+    "age": "age",
+    "noc2011": "occupation",
+    "hcdd_14v": "education_level"
 }
 
 

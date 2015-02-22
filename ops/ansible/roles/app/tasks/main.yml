@@ -1,0 +1,7 @@
+---
+
+- name: create app dir
+  file: path=/opt/mfournierca state=directory
+
+- name: deploy app code
+  git: repo={{ git_repo }} clone=yes dest=/opt/mfournierca/ recursive=yes
