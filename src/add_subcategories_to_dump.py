@@ -33,7 +33,8 @@ def subcategorize_column(d, column_name, category_prefix):
 def run(input_file, output_file):
     csvin = csv.DictReader(open(input_file, "r"))
     fieldnames = csvin.fieldnames + [
-        "occupation_cat1", "occupation_cat2", "occupation_cat3"]
+        "occupation_cat1", "occupation_cat2", "occupation_cat3",
+        "field_of_study_cat1", "field_of_study_cat2", "field_of_study_cat3"]
 
     csvout = csv.DictWriter(open(output_file, "w"), fieldnames=fieldnames)
     csvout.writeheader()
@@ -44,9 +45,8 @@ def run(input_file, output_file):
         d = subcategorize_column(d, "CIP2011_4", "field_of_study")
 
         counter += 1
-        if counter > 1 and counter % 100000 == 0:
+        if counter > 1 and counter % 500000 == 0:
             print("processed {0} lines".format(counter))
-            break
 
         csvout.writerow(d)
 
