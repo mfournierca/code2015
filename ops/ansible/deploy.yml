@@ -2,3 +2,8 @@
 
 - name: deploying app
   hosts: webservers
+  roles:
+    - base-server
+    - nginx
+    - vhost-nginx
+    - git
