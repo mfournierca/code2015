@@ -1,0 +1,4 @@
+---
+
+- name: create database tables
+  command: psql -s {{ dbname }} -c "create table data (id SERIAL, NOC2011 INT, CIP2011_4 INT,AGE INT, observation_value INT, HCDD_14V INT, time INT, GEO INT)"

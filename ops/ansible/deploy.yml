@@ -2,8 +2,18 @@
 
 - name: deploying app
   hosts: webservers
+
+  vars:
+    dbname: code2015
+    dbuser: postgres
+    dbpassword: mysupersecretpassword
+
   roles:
     - base-server
     - nginx
     - vhost-nginx
     - git
+    - postgresql
+    - postgresql-tables
+
+  sudo: True
