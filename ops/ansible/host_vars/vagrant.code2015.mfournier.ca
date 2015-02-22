@@ -1,1 +1,2 @@
 nginx_server_name: vagrant.code2015.mfournier.ca
+nginx_vhost_template: nginx_vhost_template.txt
