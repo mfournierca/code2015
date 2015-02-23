@@ -4,4 +4,4 @@
   file: path=/opt/mfournierca state=directory
 
 - name: deploy app code
-  git: repo={{ git_repo }} clone=yes dest=/opt/mfournierca/ recursive=yes
+  git: repo={{ git_repo }} dest=/opt/mfournierca/code2015 recursive=yes

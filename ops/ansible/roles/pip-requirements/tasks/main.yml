@@ -1,0 +1,7 @@
+---
+
+- name: install required packages
+  pip: name={{ item }} state=present
+  with_items:
+    - flask
+    - psycopg2

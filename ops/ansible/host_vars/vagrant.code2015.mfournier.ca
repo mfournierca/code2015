@@ -6,8 +6,8 @@ nginx_vhost_template: nginx_vhost_template.txt
 db_name: code2015
 
 # git
-git-repo: https://github.com/mfournierca/code2015.git
-git-branch: master
+git_repo: https://github.com/mfournierca/code2015.git
+git_branch: master
 
 # postgresql module vars
 # postgresql module is found in ansible-common
