@@ -2,6 +2,7 @@
 
 Usage:
     dump_raw_data.py csv <input_file> <output_file> [options]
+    dump_raw_data.py postgresql <input_file> [options]
 
 Options:
     --limit=LIMIT  Limit the dump to this number of rows
@@ -97,14 +98,7 @@ def get_fieldnames(input_handle):
     return k
 
 
-def dump_data(input_handle, output_writer, limit=None):
-    g = generate_raw_data(input_handle, limit=limit)
-    for r in g:
-        output_writer.writerow(r)
-
-
-def run(input_file, output_file, limit=None):
-
+def run_csv(input_file, output_file, limit=None):
     input_handle = open(input_file, "r")
     
     fieldnames = get_fieldnames(input_handle) 
@@ -112,15 +106,30 @@ def run(input_file, output_file, limit=None):
     output_writer = csv.DictWriter(output_handle, fieldnames=fieldnames)
     output_writer.writeheader()
     
-    try:
-        dump_data(input_handle, output_writer, limit=limit)
-    except:
-        pass
-
+    g = generate_raw_data(input_handle, limit=limit)
+    for r in g:
+        output_writer.writerow(r)
+    
     input_handle.close()
     output_handle.close()
 
 
+def run_postgresql(input_file, limit=None)
+    input_handle = open(input_file, "r")     
+    g = generate_raw_data(input_handle, limit=limit)
+    for r in g:
+        pass
+
+
 if __name__ == "__main__":
     args = docopt(__doc__)
-    run(args["<input_file>"], args["<output_file>"], int(args["--limit"]))
+
+    if args["csv"]:
+        run_csv(
+            args["<input_file>"], 
+            args["<output_file>"], 
+            limit=int(args["--limit"])
+        )
+    elif args["postgresql"]:
+        run_postgres(args["<input_file>"], limit=int(args["--limit"]))
+
