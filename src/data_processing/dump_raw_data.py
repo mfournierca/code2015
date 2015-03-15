@@ -1,10 +1,11 @@
 """Dump the raw XML data into a tabular format.
 
 Usage:
-    python dump_raw_data.py csv <input_file> <output_file> [options]
+    dump_raw_data.py csv <input_file> <output_file> [options]
 
 Options:
     --limit=LIMIT  Limit the dump to this number of rows
+    --help         Display this help page
 """
 
 from docopt import docopt
@@ -12,7 +13,7 @@ from lxml import etree
 import resource
 import csv
 
-from common import NAMESPACES
+from src.common import NAMESPACES
 
 
 SERIES_TAG = "{%s}Series" % NAMESPACES["generic"]
@@ -21,7 +22,7 @@ TIME_TAG = "{%s}Time" % NAMESPACES["generic"]
 OBSVALUE_TAG = "{%s}ObsValue" % NAMESPACES["generic"]
 
 
-def _set_cats, category_prefix, cat1, cat2, cat3):
+def _set_cats(d, category_prefix, cat1, cat2, cat3):
     d["{0}_cat1".format(category_prefix)] = cat1
     d["{0}_cat2".format(category_prefix)] = cat2
     d["{0}_cat3".format(category_prefix)] = cat3
@@ -49,8 +50,8 @@ def generate_raw_data(input_handle, limit=None, track_memory_usage=False):
             print "processed {0} rows".format(counter)
 
         if limit and counter >= limit:
-            print("reached limit {0}, stopping here".format(limit))
-            break
+            print("reached limit of {0} rows, stopping here".format(limit))
+            raise StopIteration
 
         row = {}
 
@@ -109,7 +110,7 @@ def run(input_file, output_file, limit=None):
     fieldnames = get_fieldnames(input_handle) 
     output_handle = open(output_file, "w")
     output_writer = csv.DictWriter(output_handle, fieldnames=fieldnames)
-    writer.writeheader()
+    output_writer.writeheader()
     
     try:
         dump_data(input_handle, output_writer, limit=limit)
@@ -122,4 +123,4 @@ def run(input_file, output_file, limit=None):
 
 if __name__ == "__main__":
     args = docopt(__doc__)
-    run(args["<input_file>"], args["<output_file>"], args["--limit"])
+    run(args["<input_file>"], args["<output_file>"], int(args["--limit"]))
