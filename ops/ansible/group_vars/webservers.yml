@@ -1,0 +1,28 @@
+nginx_sites:
+  - server:
+      file_name: "{{ nginx_server_name }}"
+      listen: 80
+      server_name: "{{ nginx_server_name }}"
+      root: "/var/www/{{ nginx_server_name }}"
+      location1:
+        name: "/"
+        index: index.html
+        try_files: "$uri $uri/ /index.html"
+
+# git
+git_repo: https://github.com/mfournierca/code2015.git
+git_branch: master
+
+# database config
+db_name: code2015
+
+# ANXS.postgresql module vars
+postgresql_admin_user: "postgres"
+postgresql_users:
+    - name: app_user
+      pass: app_user_password
+postgresql_user_privileges:
+    - name: app_user
+      db: "{{ db_name }}"
+postgresql_databases:
+    - name: "{{ db_name }}"
