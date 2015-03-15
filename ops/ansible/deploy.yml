@@ -3,7 +3,7 @@
 - include: ../ansible-common/deploy-base-server.yml
 
 - name: deploying app
-  hosts: appservers
+  hosts: webservers
   roles:
     - bennojoy.nginx
     - ANXS.postgresql
