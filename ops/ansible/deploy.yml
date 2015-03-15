@@ -1,14 +1,12 @@
 ---
 
+- include: ../ansible-common/deploy-base-server.yml
+
 - name: deploying app
   hosts: webservers
-
   roles:
-    - base-server
-    - nginx
-    - vhost-nginx
-    - git
-    - postgresql
+    - bennojoy.nginx
+    - ANXS.postgresql
     - postgresql-tables
     - pip-requirements
     - app
