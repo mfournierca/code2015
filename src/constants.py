@@ -1,3 +1,7 @@
+#
+# raw data xml
+#
+
 NAMESPACES = {
     "message": "http://www.SDMX.org/resources/SDMXML/schemas/v2_0/message",
     "common": "http://www.SDMX.org/resources/SDMXML/schemas/v2_0/common",
@@ -9,3 +13,4 @@ NAMESPACES = {
     "utility": "http://www.SDMX.org/resources/SDMXML/schemas/v2_0/utility",
     "xsi": "http://www.w3.org/2001/XMLSchema-instance"
 }
+

@@ -13,8 +13,10 @@ from docopt import docopt
 from lxml import etree
 import resource
 import csv
+import psycopg2
 
-from src.common import NAMESPACES
+from src.constants import NAMESPACES
+from src.db import get_cursor, insert_dict
 
 
 SERIES_TAG = "{%s}Series" % NAMESPACES["generic"]
@@ -114,11 +116,12 @@ def run_csv(input_file, output_file, limit=None):
     output_handle.close()
 
 
-def run_postgresql(input_file, limit=None)
-    input_handle = open(input_file, "r")     
-    g = generate_raw_data(input_handle, limit=limit)
-    for r in g:
-        pass
+def run_postgresql(input_file, limit=None):
+    with open(input_file, "r") as input_handle:
+        cur = get_cursor()
+        g = generate_raw_data(input_handle, limit=limit)
+        for r in g:
+            insert_dict(cur, r)
 
 
 if __name__ == "__main__":
@@ -131,5 +134,5 @@ if __name__ == "__main__":
             limit=int(args["--limit"])
         )
     elif args["postgresql"]:
-        run_postgres(args["<input_file>"], limit=int(args["--limit"]))
+        run_postgresql(args["<input_file>"], limit=int(args["--limit"]))
 
