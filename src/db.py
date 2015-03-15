@@ -6,10 +6,14 @@ DB_TABLE="data"
 
 
 def get_conn():
-    return psycopg2.connect("dbname={0} user={1}".format(DB_NAME, DB_USER))
+    conn = psycopg2.connect("dbname={0} user={1}".format(DB_NAME, DB_USER))
+    conn.autocommit = True
+    return conn
+
 
 def get_cursor():
-    get_conn().cursor()
+    return get_conn().cursor()
+
 
 def insert_dict(cur, d, table=None):
     # I shouldn't need to write this function, I expected something better
@@ -18,9 +22,9 @@ def insert_dict(cur, d, table=None):
         table = DB_TABLE
     keys = d.keys()
 
-    
-    return "INSERT INTO {0} {1} VALUES {2}".format(
+    statement = "INSERT INTO {0} ({1}) VALUES ({2});".format(
         table,
-        keys, 
-        [d[k] for k in keys]
-    )
+        ", ".join(keys), 
+        ", ".join(["%s" for k in keys])
+    ) 
+    cur.execute(statement, [d[k] if d[k] else None for k in keys])

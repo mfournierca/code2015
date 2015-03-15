@@ -49,13 +49,6 @@ def generate_raw_data(input_handle, limit=None, track_memory_usage=False):
     context = etree.iterparse(input_handle, events=("start",))
     for action, elem in context:
 
-        if counter > 1000 and counter % 1000 == 0:
-            print "processed {0} rows".format(counter)
-
-        if limit and counter >= limit:
-            print("reached limit of {0} rows, stopping here".format(limit))
-            raise StopIteration
-
         row = {}
 
         if elem.tag == SERIES_TAG:
@@ -90,6 +83,14 @@ def generate_raw_data(input_handle, limit=None, track_memory_usage=False):
             del elem.getparent()[0]
         counter += 1
 
+        # check counter
+        if counter > 1000 and counter % 1000 == 0:
+            print "processed {0} rows".format(counter)
+
+        if limit and counter >= limit:
+            print("reached limit of {0} rows, stopping here".format(limit))
+            raise StopIteration
+
         yield row
 
 
@@ -122,6 +123,7 @@ def run_postgresql(input_file, limit=None):
         g = generate_raw_data(input_handle, limit=limit)
         for r in g:
             insert_dict(cur, r)
+        cur.close()
 
 
 if __name__ == "__main__":
