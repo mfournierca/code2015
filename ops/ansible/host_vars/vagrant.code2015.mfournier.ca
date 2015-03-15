@@ -1,22 +1,3 @@
 # nginx config
 nginx_server_name: vagrant.code2015.mfournier.ca
-nginx_vhost_template: nginx_vhost_template.txt
 
-# database config
-db_name: code2015
-
-# git
-git_repo: https://github.com/mfournierca/code2015.git
-git_branch: master
-
-# postgresql module vars
-# postgresql module is found in ansible-common
-postgresql_admin_user: "postgres"
-postgresql_users:
-    - name: app_user
-      pass: app_user_password
-postgresql_user_privileges:
-    - name: app_user
-      db: "{{ db_name }}"
-postgresql_databases:
-    - name: "{{ db_name }}"
