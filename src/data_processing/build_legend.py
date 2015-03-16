@@ -1,20 +1,22 @@
-"""Build a legend from the source data structure document.
+"""Build a legend from the data structure document.
 
-The legend is mapping between the different id values found in the data set and
-their plain-text equivalent.
+The legend is a dictionary. The dictionary maps between the different id values 
+found in the data set and their plain-text equivalent.
 
 Usage:
-    build_legend.py <structure_file> <output_file>
+    build_legend.py <structure_file> <output_file> [options]
 
 Arguments:
     <structure_file>  structure file that came with the dataset
     <output_file>     output file for the legend
+    --help            show this help page
 """
 
 from lxml import etree
 from docopt import docopt
+import json
 
-from common import NAMESPACES
+from src.constants import NAMESPACES
 
 
 TAG_MAPPING = {
@@ -53,14 +55,14 @@ def parse_legend_document(d):
 
 def parse_legend_file(f):
     doc = etree.parse(f)
-    legend = parse_document(doc)
+    legend = parse_legend_document(doc)
     return legend
 
 
 def run(input_file, output_file):
     legend = parse_legend_file(input_file)
-    with open(output_file) as f:
-        f.write(str(legend))
+    with open(output_file, "w") as f:
+        f.write(json.dumps(legend, indent=2))
 
 
 if __name__ == "__main__":
