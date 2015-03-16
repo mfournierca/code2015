@@ -50,7 +50,7 @@ def _subcategorize_column(d, column_name, category_prefix):
 
 def generate_raw_data(input_handle, limit=None, track_memory_usage=False):
 
-    starttime = datettime.datetime.utcnow()
+    starttime = datetime.datetime.utcnow()
     counter = 0
     context = etree.iterparse(input_handle, events=("start",))
     for action, elem in context:
