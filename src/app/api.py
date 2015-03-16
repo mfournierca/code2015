@@ -1,12 +1,13 @@
 from flask import Flask
 from flask import request
+from flask import g
+
 import psycopg2
 import copy
 
+from src.db import get_cursor
+
 app = Flask(__name__)
-# db_conn = psycopg2.connect(
-#     database="code2015", user="app_user", password="app_user_password")
-# cursor = db_conn.cursor()
 
 
 DEFAULTS = {
@@ -35,6 +36,29 @@ def build_query(args):
     return q
 
 
+@app.before_request
+def before_request():
+    g.cur = get_cursor()
+
+
+@app.teardown_request
+def teardown_request(exception):
+    cur = getattr(g, 'cur', None)
+    if cur is not None:
+        cur.close()
+
+
+# db_conn = psycopg2.connect(
+#     database="code2015", user="app_user", password="app_user_password")
+# cursor = db_conn.cursor()
+# db_conn = psycopg2.connect(
+#     database="code2015", user="app_user", password="app_user_password")
+# cursor = db_conn.cursor()
+# db_conn = psycopg2.connect(
+#     database="code2015", user="app_user", password="app_user_password")
+# cursor = db_conn.cursor()
+
+
 @app.route('/api/v1/status')
 def status():
     return 'Hello World!'
@@ -42,12 +66,19 @@ def status():
 
 @app.route('/api/v1/totals')
 def totals():
-    cip_2011_4 = request.args.get("cip_2011_4")
-    if cip_2011_4:
-        q = build_query({"cip_2011_4": cip_2011_4})
+    cip2011_4 = request.args.get("cip2011_4")
+    if cip2011_4:
+        q = build_query({"cip2011_4": cip2011_4})
     else:
-        raise ValueError("invalid value for cip_2011_4: {0}".format(cip_2011_4))
-    return q
+        raise ValueError("invalid value for cip2011_4: {0}".format(cip_2011_4))
+    
+    g.cur.execute(q)
+    if g.cur.rowcount > 1:
+        raise ValueError("found more than one value for query")
+    elif g.cur.rowcount == 0:
+        raise ValueError("found no data for query")
+    
+    return str(g.cur.fetchone())
 
     # get query params
     # need field of study
