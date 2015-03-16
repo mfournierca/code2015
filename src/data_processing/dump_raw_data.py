@@ -19,6 +19,7 @@ import resource
 import csv
 import psycopg2
 import zipfile
+import datetime
 
 from src.constants import NAMESPACES, ZIP_DATA_PATH
 from src.db import get_cursor, insert_dict
@@ -49,6 +50,7 @@ def _subcategorize_column(d, column_name, category_prefix):
 
 def generate_raw_data(input_handle, limit=None, track_memory_usage=False):
 
+    starttime = datettime.datetime.utcnow()
     counter = 0
     context = etree.iterparse(input_handle, events=("start",))
     for action, elem in context:
@@ -89,7 +91,10 @@ def generate_raw_data(input_handle, limit=None, track_memory_usage=False):
 
         # check counter
         if counter > 100000 and counter % 100000 == 0:
-            print "processed {0} rows".format(counter)
+            t = datetime.datetime.utcnow() - starttime
+            print "processed {0} rows in {1} seconds".format(
+                counter, 
+                t.seconds)
 
         if limit and counter >= limit:
             print("reached limit of {0} rows, stopping here".format(limit))
