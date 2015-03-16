@@ -87,10 +87,10 @@ def generate_raw_data(input_handle, limit=None, track_memory_usage=False):
         elem.clear()
         while elem.getprevious() is not None:
             del elem.getparent()[0]
-        counter += 1
 
         # check counter
-        if counter > 100000 and counter % 100000 == 0:
+        counter += 1
+        if counter > 0 and counter % 100000 == 0:
             t = datetime.datetime.utcnow() - starttime
             print "processed {0} rows in {1} seconds".format(
                 counter, 
