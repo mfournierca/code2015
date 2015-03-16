@@ -138,12 +138,15 @@ def run_postgresql(input_file, limit=None):
 if __name__ == "__main__":
     args = docopt(__doc__)
 
+    limit = args["--limit"]
+    limit = int(limit) if limit else None
+
     if args["csv"]:
         run_csv(
             args["<archive_path>"], 
             args["<output_file>"], 
-            limit=int(args["--limit"])
+            limit=limit
         )
     elif args["postgresql"]:
-        run_postgresql(args["<archive_path>"], limit=int(args["--limit"]))
+        run_postgresql(args["<archive_path>"], limit=limit)
 
