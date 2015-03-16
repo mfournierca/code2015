@@ -88,7 +88,7 @@ def generate_raw_data(input_handle, limit=None, track_memory_usage=False):
         counter += 1
 
         # check counter
-        if counter > 1000 and counter % 1000 == 0:
+        if counter > 100000 and counter % 100000 == 0:
             print "processed {0} rows".format(counter)
 
         if limit and counter >= limit:
