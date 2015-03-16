@@ -14,3 +14,8 @@ NAMESPACES = {
     "xsi": "http://www.w3.org/2001/XMLSchema-instance"
 }
 
+#
+# data in the zip archive
+#
+
+ZIP_DATA_PATH = 'Generic_99-012-X2011056.xml'

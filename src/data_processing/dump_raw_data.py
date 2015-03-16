@@ -1,8 +1,12 @@
 """Dump the raw XML data into a tabular format.
 
 Usage:
-    dump_raw_data.py csv <input_file> <output_file> [options]
-    dump_raw_data.py postgresql <input_file> [options]
+    dump_raw_data.py csv <archive_path> <output_file> [options]
+    dump_raw_data.py postgresql <archive_path> [options]
+
+Arguments:
+    <archive_path>  The path to the zip archive containing the raw data.
+    <output_file>   Path to write the csv file to 
 
 Options:
     --limit=LIMIT  Limit the dump to this number of rows
@@ -14,10 +18,10 @@ from lxml import etree
 import resource
 import csv
 import psycopg2
+import zipfile
 
-from src.constants import NAMESPACES
+from src.constants import NAMESPACES, ZIP_DATA_PATH
 from src.db import get_cursor, insert_dict
-
 
 SERIES_TAG = "{%s}Series" % NAMESPACES["generic"]
 VALUE_TAG = "{%s}Value" % NAMESPACES["generic"]
@@ -101,8 +105,13 @@ def get_fieldnames(input_handle):
     return k
 
 
+def get_input_from_zip(archive_path):
+    z = zipfile.ZipFile(archive_path, "r")
+    return z.open(ZIP_DATA_PATH)
+
+
 def run_csv(input_file, output_file, limit=None):
-    input_handle = open(input_file, "r")
+    input_handle = get_input_from_zip(input_file)
     
     fieldnames = get_fieldnames(input_handle) 
     output_handle = open(output_file, "w")
@@ -118,7 +127,7 @@ def run_csv(input_file, output_file, limit=None):
 
 
 def run_postgresql(input_file, limit=None):
-    with open(input_file, "r") as input_handle:
+    with get_input_from_zip(input_file) as input_handle:
         cur = get_cursor()
         g = generate_raw_data(input_handle, limit=limit)
         for r in g:
@@ -131,10 +140,10 @@ if __name__ == "__main__":
 
     if args["csv"]:
         run_csv(
-            args["<input_file>"], 
+            args["<archive_path>"], 
             args["<output_file>"], 
             limit=int(args["--limit"])
         )
     elif args["postgresql"]:
-        run_postgresql(args["<input_file>"], limit=int(args["--limit"]))
+        run_postgresql(args["<archive_path>"], limit=int(args["--limit"]))
 
