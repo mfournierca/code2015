@@ -26,9 +26,7 @@ DEFAULTS = {
 
 
 
-def build_query(args):
-    d = copy.copy(DEFAULTS)
-    d.update(args)
+def build_query(d):
     q = "SELECT SUM(observation_value) FROM data WHERE "
     q += "AND ".join(
         [k + " IN (" + ",".join([str(j) for j in d[k]]) + ") " for k in d]
@@ -38,25 +36,15 @@ def build_query(args):
 
 @app.before_request
 def before_request():
-    g.cur = get_cursor()
+    g.cur = get_cursor() 
+    g.d = copy.copy(DEFAULTS)
 
-
+    
 @app.teardown_request
 def teardown_request(exception):
     cur = getattr(g, 'cur', None)
     if cur is not None:
         cur.close()
-
-
-# db_conn = psycopg2.connect(
-#     database="code2015", user="app_user", password="app_user_password")
-# cursor = db_conn.cursor()
-# db_conn = psycopg2.connect(
-#     database="code2015", user="app_user", password="app_user_password")
-# cursor = db_conn.cursor()
-# db_conn = psycopg2.connect(
-#     database="code2015", user="app_user", password="app_user_password")
-# cursor = db_conn.cursor()
 
 
 @app.route('/api/v1/status')
@@ -66,11 +54,12 @@ def status():
 
 @app.route('/api/v1/totals')
 def totals():
-    cip2011_4 = request.args.get("cip2011_4")
-    if cip2011_4:
-        q = build_query({"cip2011_4": cip2011_4})
-    else:
-        raise ValueError("invalid value for cip2011_4: {0}".format(cip_2011_4))
+    for k in g.d:
+        v = request.args.get(k, None)
+        if v:
+            g.d[k] = v.split(",")
+    
+    q = build_query(g.d)
     
     g.cur.execute(q)
     if g.cur.rowcount > 1:
