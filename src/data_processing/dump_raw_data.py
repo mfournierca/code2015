@@ -112,7 +112,7 @@ def generate_raw_data(input_handle, limit=None, track_memory_usage=False):
         if row["GEO"] != "01": 
             continue
         
-        # skip rows that are not university educated or above
+        # skip rows that are not post-secondary or above
         if row["HCDD_14V"] not in ["4"]: 
             continue
         

@@ -31,7 +31,7 @@ TAG_MAPPING = {
 }
 
 
-def _parse_codelist(document, codelist_id):
+def _parse_codelist(document, codelist_id, extract_category_id=False):
     legend = []
     entries = document.xpath(
         "//structure:CodeList[@id='{0}']/structure:Code".format(codelist_id),
@@ -43,8 +43,13 @@ def _parse_codelist(document, codelist_id):
             "./structure:Description/text()",
             namespaces=NAMESPACES
         )[0] 
-        category_id, category_name = extract_category_name_id(name)
-       
+        
+        if extract_category_id:
+            category_id, category_name = extract_category_name_id(name)
+        else:
+            name = name.strip()
+            category_id, category_name = None, name
+ 
         legend.append({
             "category_id": category_id, 
             "category_name": category_name, 
@@ -61,6 +66,10 @@ def _gather_codelist(codelist):
 
     for c in codelist:
 
+        if not c["category_id"]:
+            l["subcategories"].append(c)
+            continue
+
         keys = []
         if c.get("category_id", "").find(".") == -1:
             for i in range(len(c["category_id"]) + 1):
@@ -75,7 +84,10 @@ def _gather_codelist(codelist):
 
         nl = l 
         for i, k in enumerate(keys):
-            kl = [t for t in nl["subcategories"] if t["category_id"] == k]
+            kl = [
+                t for t in nl["subcategories"] 
+                if bool(t["category_id"]) and t["category_id"] == k
+            ]
             if len(kl) == 0:
                 ll = {"category_id": k, "subcategories": []}
                 nl["subcategories"].append(ll) 
@@ -96,9 +108,11 @@ def _gather_codelist(codelist):
 def parse_legend_document(d):
     legend = {
         "GEO": _parse_codelist(d, "CL_GEO"),
-        "CIP2011_4": _parse_codelist(d, "CL_CIP2011_4"),
+        "CIP2011_4": _parse_codelist(
+            d, "CL_CIP2011_4", extract_category_id=True
+        ),
         "AGE": _parse_codelist(d, "CL_AGE"),
-        "NOC2011": _parse_codelist(d, "CL_NOC2011"),
+        "NOC2011": _parse_codelist(d, "CL_NOC2011", extract_category_id=True),
         "HCDD_14V": _parse_codelist(d, "CL_HCDD_14V")
     }
     return legend
