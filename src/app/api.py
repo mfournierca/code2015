@@ -67,6 +67,13 @@ def total():
     return str(g.cur.fetchone())
 
 
+@app.route("/api/v1/ranking")
+def employment_ranking():
+    pass
+    # all you need is e.g.
+    # select noc2011, observation_value from data where cip2011_4=7 and occupation_cat3 is not null order by noc2011 limit 10;
+
+
 @app.route('/api/v1/ratios')
 def ratios():
     pass
