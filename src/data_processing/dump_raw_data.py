@@ -78,7 +78,7 @@ def generate_raw_data(input_handle, limit=None, track_memory_usage=False):
                     row["observation_value"] = e.get("value")
 
             # extract sub categories 
-            # row = _subcategorize_column(row, "NOC2011", "occupation")
+            row = _subcategorize_column(row, "NOC2011", "occupation")
             # row = _subcategorize_column(row, "CIP2011_4", "field_of_study")
 
         else:
