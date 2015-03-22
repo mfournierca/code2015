@@ -31,6 +31,13 @@ TAG_MAPPING = {
 }
 
 
+def _get_next_unique_nocat_id():
+    start = 0
+    while True:
+        start += 1
+        yield "nocategory.{0}".format(start)
+
+
 def _parse_codelist(document, codelist_id, extract_category_id=False):
     legend = []
     entries = document.xpath(
@@ -49,6 +56,9 @@ def _parse_codelist(document, codelist_id, extract_category_id=False):
         else:
             name = name.strip()
             category_id, category_name = None, name
+
+        if not category_id:
+            category_id = _get_next_unique_nocat_id()
  
         legend.append({
             "category_id": category_id, 
@@ -66,14 +76,10 @@ def _gather_codelist(codelist):
 
     for c in codelist:
 
-        if not c["category_id"]:
-            l["subcategories"].append(c)
-            continue
-
         keys = []
         if c.get("category_id", "").find(".") == -1:
             for i in range(len(c["category_id"]) + 1):
-                keys.append(c["category_id"][:i])
+                keys.append(c["category_id"][:i]) 
         else:
             p = c.get("category_id", "")
             if p.endswith("."):   
@@ -85,8 +91,7 @@ def _gather_codelist(codelist):
         nl = l 
         for i, k in enumerate(keys):
             kl = [
-                t for t in nl["subcategories"] 
-                if bool(t["category_id"]) and t["category_id"] == k
+                t for t in nl["subcategories"] if t["category_id"] == k
             ]
             if len(kl) == 0:
                 ll = {"category_id": k, "subcategories": []}
