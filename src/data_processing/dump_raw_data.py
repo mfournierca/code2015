@@ -20,6 +20,7 @@ import csv
 import psycopg2
 import zipfile
 import datetime
+import re
 
 from src.constants import NAMESPACES, ZIP_DATA_PATH
 from src.db import get_cursor, insert_dict
@@ -47,11 +48,23 @@ def _subcategorize_column(d, column_name, category_prefix):
         d = _set_cats(d, category_prefix, cat[0], cat[:2], cat)
     return d
 
+def _extract_noc_id(d):
+    n = d.get("NOC2011")
+    if not n:
+        return None
+    i = re.search(r"^\s*(\d+)", n).group(1)
+    return i
+
+def _set_noc_id(d):
+    d["NOC2011_ID"] = _extract_noc_id(d)
+    return d 
+
 
 def generate_raw_data(input_handle, limit=None, track_memory_usage=False):
 
     starttime = datetime.datetime.utcnow()
     counter = 0
+    read_counter = 0
     context = etree.iterparse(input_handle, events=("start",))
     for action, elem in context:
 
@@ -59,10 +72,12 @@ def generate_raw_data(input_handle, limit=None, track_memory_usage=False):
 
         if elem.tag == SERIES_TAG:
 
+            # skip non - data entries
             children = elem.getchildren()
             if len(children) != 2:
-                continue
+                 continue
 
+            # extract data
             for e in children[0]:
                 if e.tag == VALUE_TAG:
                     row[e.get("concept")] = e.get("value")
@@ -73,12 +88,13 @@ def generate_raw_data(input_handle, limit=None, track_memory_usage=False):
                 elif e.tag == OBSVALUE_TAG:
                     row["observation_value"] = e.get("value")
 
+            # extract sub categories 
             row = _subcategorize_column(row, "NOC2011", "occupation")
             row = _subcategorize_column(row, "CIP2011_4", "field_of_study")
 
         else:
             continue
-
+ 
         # track memory usage
         if track_memory_usage:        
             print resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
@@ -87,26 +103,41 @@ def generate_raw_data(input_handle, limit=None, track_memory_usage=False):
         elem.clear()
         while elem.getprevious() is not None:
             del elem.getparent()[0]
-
+ 
         # check counter
-        counter += 1
-        if counter > 0 and counter % 100000 == 0:
+        read_counter += 1
+        if read_counter > 0 and read_counter % 100000 == 0:
             t = datetime.datetime.utcnow() - starttime
-            print "processed {0} rows in {1} seconds".format(
-                counter, 
-                t.seconds)
+            print "read {0}, processed {1} rows in {2} seconds".format(
+                read_counter, 
+                counter,
+                t.seconds
+            )
 
-        if limit and counter >= limit:
+        if limit and counter > limit:
             print("reached limit of {0} rows, stopping here".format(limit))
             raise StopIteration
 
+        # skip province - specific rows
+        if row["GEO"] != "01": 
+            continue
+
+        # skip non - educated rows
+        if row["HCDD_14V"] not in ["8"]: 
+            continue
+
+        # skip specific age groups
+        if row["AGE"] != "1": 
+            continue
+
+        counter += 1
         yield row
 
 
-def get_fieldnames(input_handle):
+def get_fieldnames(input_file): 
+    input_handle = get_input_from_zip(input_file)
     g = generate_raw_data(input_handle, limit=1)
     k = g.next().keys()
-    input_handle.seek(0)
     return k
 
 
@@ -116,9 +147,9 @@ def get_input_from_zip(archive_path):
 
 
 def run_csv(input_file, output_file, limit=None):
-    input_handle = get_input_from_zip(input_file)
+    fieldnames = get_fieldnames(input_file) 
     
-    fieldnames = get_fieldnames(input_handle) 
+    input_handle = get_input_from_zip(input_file) 
     output_handle = open(output_file, "w")
     output_writer = csv.DictWriter(output_handle, fieldnames=fieldnames)
     output_writer.writeheader()
