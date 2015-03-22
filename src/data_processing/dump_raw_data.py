@@ -48,17 +48,6 @@ def _subcategorize_column(d, column_name, category_prefix):
         d = _set_cats(d, category_prefix, cat[0], cat[:2], cat)
     return d
 
-def _extract_noc_id(d):
-    n = d.get("NOC2011")
-    if not n:
-        return None
-    i = re.search(r"^\s*(\d+)", n).group(1)
-    return i
-
-def _set_noc_id(d):
-    d["NOC2011_ID"] = _extract_noc_id(d)
-    return d 
-
 
 def generate_raw_data(input_handle, limit=None, track_memory_usage=False):
 
