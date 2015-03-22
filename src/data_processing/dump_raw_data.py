@@ -78,8 +78,8 @@ def generate_raw_data(input_handle, limit=None, track_memory_usage=False):
                     row["observation_value"] = e.get("value")
 
             # extract sub categories 
-            row = _subcategorize_column(row, "NOC2011", "occupation")
-            row = _subcategorize_column(row, "CIP2011_4", "field_of_study")
+            # row = _subcategorize_column(row, "NOC2011", "occupation")
+            # row = _subcategorize_column(row, "CIP2011_4", "field_of_study")
 
         else:
             continue
@@ -107,14 +107,16 @@ def generate_raw_data(input_handle, limit=None, track_memory_usage=False):
             print("reached limit of {0} rows, stopping here".format(limit))
             raise StopIteration
 
+        # we only look at aggregate data across all of Canada
         # skip province - specific rows
         if row["GEO"] != "01": 
             continue
-
-        # skip non - educated rows
-        if row["HCDD_14V"] not in ["8"]: 
+        
+        # skip rows that are not university educated or above
+        if row["HCDD_14V"] not in ["4"]: 
             continue
-
+        
+        # aggregate across all age groups
         # skip specific age groups
         if row["AGE"] != "1": 
             continue

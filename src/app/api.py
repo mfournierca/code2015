@@ -9,13 +9,12 @@ from src.db import get_cursor
 
 app = Flask(__name__)
 
-
 DEFAULTS = {
     "geo": [1],
     "cip2011_4": [1],
     "age": [1],
     "noc2011": [1],
-    "hcdd_14v": [2, 3, 4]
+    "hcdd_14v": [8]
 }
 
 #    "geo": "location",
@@ -25,8 +24,7 @@ DEFAULTS = {
 #    "hcdd_14v": "education_level"
 
 
-
-def build_query(d):
+def build_totals_query(d):
     q = "SELECT SUM(observation_value) FROM data WHERE "
     q += "AND ".join(
         [k + " IN (" + ",".join([str(j) for j in d[k]]) + ") " for k in d]
@@ -38,8 +36,12 @@ def build_query(d):
 def before_request():
     g.cur = get_cursor() 
     g.d = copy.copy(DEFAULTS)
-
-    
+    for k in g.d:
+        v = request.args.get(k, None)
+        if v:
+            g.d[k] = v.split(",")
+   
+ 
 @app.teardown_request
 def teardown_request(exception):
     cur = getattr(g, 'cur', None)
@@ -52,26 +54,17 @@ def status():
     return 'Hello World!'
 
 
-@app.route('/api/v1/totals')
-def totals():
-    for k in g.d:
-        v = request.args.get(k, None)
-        if v:
-            g.d[k] = v.split(",")
-    
-    q = build_query(g.d)
-    
+@app.route('/api/v1/total')
+def total(): 
+    q = build_totals_query(g.d) 
     g.cur.execute(q)
+
     if g.cur.rowcount > 1:
         raise ValueError("found more than one value for query")
     elif g.cur.rowcount == 0:
         raise ValueError("found no data for query")
     
     return str(g.cur.fetchone())
-
-    # get query params
-    # need field of study
-
 
 
 @app.route('/api/v1/ratios')
