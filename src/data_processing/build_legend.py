@@ -79,7 +79,6 @@ def _gather_codelist(codelist):
             if len(kl) == 0:
                 ll = {"category_id": k, "subcategories": []}
                 nl["subcategories"].append(ll) 
-                nl["subcategories"].sort()
                 nl = ll
             elif len(kl) > 1:
                 print("category id not unique! {0}".format(kl))
@@ -89,6 +88,7 @@ def _gather_codelist(codelist):
 
         nl["category_name"] = c.get("category_name")
         nl["category_key"] = c.get("category_key")
+        nl["subcategories"].sort()
     
     return l
 
