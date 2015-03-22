@@ -43,6 +43,8 @@ def _parse_codelist(document, codelist_id, extract_category_id=False):
     entries = document.xpath(
         "//structure:CodeList[@id='{0}']/structure:Code".format(codelist_id),
         namespaces=NAMESPACES)
+    
+    no_category_id_generator = _get_next_unique_nocat_id()
 
     for e in entries:
         category_key = e.get("value")  
@@ -58,7 +60,7 @@ def _parse_codelist(document, codelist_id, extract_category_id=False):
             category_id, category_name = None, name
 
         if not category_id:
-            category_id = _get_next_unique_nocat_id()
+            category_id = no_category_id_generator.next()
  
         legend.append({
             "category_id": category_id, 
