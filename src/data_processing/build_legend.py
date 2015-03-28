@@ -120,15 +120,16 @@ def _gather_codelist(codelist):
         nl["category_name"] = c.get("category_name")
         nl["category_key"] = category_key
    
-    l = _sort_subcategories(l) 
     return l
 
 
 def _parse_legend(document, codelist_id, extract_category_id=False):
     legend = _parse_codelist(
         document, codelist_id, extract_category_id=extract_category_id)
-    return _gather_codelist(legend)
-   
+    legend = _gather_codelist(legend)   
+    legend = _sort_subcategories(legend) 
+    return legend
+
  
 def parse_full_legend(d):
     legend = {
@@ -143,15 +144,17 @@ def parse_full_legend(d):
     return legend
 
 
+def _parse_category_mapping(document, codelist_id, extract_category_id=False):
+    legend = _parse_codelist(
+        document, codelist_id, extract_category_id=extract_category_id)
+    return legend
+
+
 def parse_full_category_mapping(d):
     category_mapping = {
-        "GEO": _parse_codelist(d, "CL_GEO"),
-        "CIP2011_4": _parse_codelist(
+        "CIP2011_4": _parse_category_mapping(
             d, "CL_CIP2011_4", extract_category_id=True
         ),
-        "AGE": _parse_codelist(d, "CL_AGE"),
-        "NOC2011": _parse_codelist(d, "CL_NOC2011", extract_category_id=True),
-        "HCDD_14V": _parse_codelist(d, "CL_HCDD_14V")
     }
     return category_mapping
 

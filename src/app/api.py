@@ -29,13 +29,8 @@ DEFAULTS = {
     "hcdd_14v": [4]
 }
 
+# this should be in its own database table
 CATEGORY_MAPPING = None
-
-#    "geo": "location",
-#    "cip2011_4": "field_of_study",
-#    "age": "age",
-#    "noc2011": "occupation",
-#    "hcdd_14v": "education_level"
 
 
 @app.before_request
