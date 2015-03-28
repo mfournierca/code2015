@@ -4,11 +4,14 @@ The legend is a dictionary. The dictionary maps between the different id values
 found in the data set and their plain-text equivalent.
 
 Usage:
-    build_legend.py <structure_file> <output_file> [options]
+    build_legend.py <structure_file> <legend_file> <category_map_file> [options]
 
 Arguments:
     <structure_file>  structure file that came with the dataset
-    <output_file>     output file for the legend
+    <legend_file>     output file for the legend, a nested dictionary of 
+                      categories
+    <category_map_file>  output file for the category mapping, a dictionary
+                         mapping category keys to ids
     --help            show this help page
 """
 
@@ -39,7 +42,7 @@ def _get_next_unique_nocat_id():
 
 
 def _parse_codelist(document, codelist_id, extract_category_id=False):
-    legend = []
+    legend = {}
     entries = document.xpath(
         "//structure:CodeList[@id='{0}']/structure:Code".format(codelist_id),
         namespaces=NAMESPACES)
@@ -62,21 +65,31 @@ def _parse_codelist(document, codelist_id, extract_category_id=False):
         if not category_id:
             category_id = no_category_id_generator.next()
  
-        legend.append({
+        legend[category_key] = {
             "category_id": category_id, 
             "category_name": category_name, 
-            "category_key": category_key,
             "subcategories": []
-        })
+        }
 
     return _gather_codelist(legend)
+
+
+def _sort_subcategories(l): 
+    subcats = l.get("subcategories", [])
+    subcats.sort(key=lambda x: x["category_id"])
+    l["subcategories"] = subcats
+
+    for i, s in enumerate(l["subcategories"]):
+        l["subcategories"][i] = _sort_subcategories(s)
+    
+    return l
 
     
 def _gather_codelist(codelist):
       
     l = {"category_id": None, "subcategories": []}
 
-    for c in codelist:
+    for k, c in codelist.iteritems():
 
         keys = []
         if c.get("category_id", "").find(".") == -1:
@@ -89,7 +102,6 @@ def _gather_codelist(codelist):
             else:
                 keys = [p.split(".")[0] + ".", p]
 
-
         nl = l 
         for i, k in enumerate(keys):
             kl = [
@@ -98,7 +110,6 @@ def _gather_codelist(codelist):
             if len(kl) == 0:
                 ll = {"category_id": k, "subcategories": []}
                 nl["subcategories"].append(ll) 
-                nl["subcategories"].sort(key=lambda x: x["category_id"])
                 nl = ll
             elif len(kl) > 1:
                 print("category id not unique! {0}".format(kl))
@@ -107,8 +118,9 @@ def _gather_codelist(codelist):
                 nl = kl[0]
 
         nl["category_name"] = c.get("category_name")
-        nl["category_key"] = c.get("category_key")
-    
+        nl["category_key"] = k
+   
+    l = _sort_subcategories(l) 
     return l
 
     
@@ -141,5 +153,5 @@ if __name__ == "__main__":
     args = docopt(__doc__)
     run(
         args["<structure_file>"],
-        args["<output_file>"]
+        args["<legend_file>"]
     )
