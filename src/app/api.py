@@ -1,7 +1,19 @@
+"""The api.
+
+Usage:
+    api.py <category_mapping_file>
+
+Arguments:
+    <category_mapping_file>  The path to the category mapping file. 
+"""
+
 from flask import Flask
 from flask import request
 from flask import g
 
+from docopt import docopt
+
+import json
 import psycopg2
 import copy
 
@@ -16,6 +28,8 @@ DEFAULTS = {
     "noc2011": [1],
     "hcdd_14v": [4]
 }
+
+CATEGORY_MAPPING = None
 
 #    "geo": "location",
 #    "cip2011_4": "field_of_study",
@@ -68,7 +82,7 @@ def total():
     return str(g.cur.fetchone()[0])
 
 
-def build_ranking_query(d):
+def build_rank_query(d):
     q = "select noc2011, observation_value from data where "
     q += "and ".join(
         [k + " in (" + ",".join([str(j) for j in d[k]]) + ") " 
@@ -81,9 +95,20 @@ def build_ranking_query(d):
     return q
 
 
-@app.route("/api/v1/ranking")
-def employment_ranking():
-    pass
+@app.route("/api/v1/rank")
+def rank():
+    q = build_rank_query(g.d)    
+    g.cur.execute(q)
+    
+    result = {"rank": []}
+    for r in g.cur.fetchall():
+        n = CATEGORY_MAPPING["NOC2011"][str(r[0])]
+        result["rank"].append({
+            "name": n["category_name"], 
+            "count": r[1]
+        })
+    return str(result)
+    
     # all you need is e.g.
     # select noc2011, observation_value from data where cip2011_4=7 and occupation_cat3 is not null order by noc2011 limit 10;
 
@@ -120,5 +145,12 @@ def ratios():
 
 
 if __name__ == '__main__':
+    args = docopt(__doc__)
+    
+    CATEGORY_MAPPING = json.loads(
+        "".join(open(args["<category_mapping_file>"], "r"))
+    )
+    
     app.debug = True
     app.run()
+    
