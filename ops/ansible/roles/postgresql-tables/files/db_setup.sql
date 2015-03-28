@@ -10,7 +10,5 @@ CREATE TABLE data (
     occupation_cat1 INT,
     occupation_cat2 INT,
     occupation_cat3 INT,
-    field_of_study_cat1 INT,
-    field_of_study_cat2 INT,
-    field_of_study_cat3 INT
+    occupation_cat4 INT
     );
