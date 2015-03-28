@@ -14,7 +14,7 @@ DEFAULTS = {
     "cip2011_4": [1],
     "age": [1],
     "noc2011": [1],
-    "hcdd_14v": [8]
+    "hcdd_14v": [4]
 }
 
 #    "geo": "location",
@@ -22,14 +22,6 @@ DEFAULTS = {
 #    "age": "age",
 #    "noc2011": "occupation",
 #    "hcdd_14v": "education_level"
-
-
-def build_totals_query(d):
-    q = "SELECT SUM(observation_value) FROM data WHERE "
-    q += "AND ".join(
-        [k + " IN (" + ",".join([str(j) for j in d[k]]) + ") " for k in d]
-    )
-    return q
 
 
 @app.before_request
@@ -54,6 +46,15 @@ def status():
     return 'Hello World!'
 
 
+def build_totals_query(d):
+    q = "SELECT SUM(observation_value) FROM data WHERE "
+    q += "AND ".join(
+        [k + " IN (" + ",".join([str(j) for j in d[k]]) + ") " for k in d]
+    )
+    q += ";"
+    return q
+
+
 @app.route('/api/v1/total')
 def total(): 
     q = build_totals_query(g.d) 
@@ -64,7 +65,20 @@ def total():
     elif g.cur.rowcount == 0:
         raise ValueError("found no data for query")
     
-    return str(g.cur.fetchone())
+    return str(g.cur.fetchone()[0])
+
+
+def build_ranking_query(d):
+    q = "select noc2011, observation_value from data where "
+    q += "and ".join(
+        [k + " in (" + ",".join([str(j) for j in d[k]]) + ") " 
+        for k in d if k != "noc2011"]
+    )
+    q += (" and observation_value is not null "
+         " and occupation_cat3 is not null "
+         " order by observation_value desc "
+         " limit 10;")
+    return q
 
 
 @app.route("/api/v1/ranking")
