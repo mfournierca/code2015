@@ -108,40 +108,6 @@ def rank():
             "count": r[1]
         })
     return str(result)
-    
-    # all you need is e.g.
-    # select noc2011, observation_value from data where cip2011_4=7 and occupation_cat3 is not null order by noc2011 limit 10;
-
-
-@app.route('/api/v1/ratios')
-def ratios():
-    pass
-    # get query params
-    # query db
-    # get totals
-    # get denominators
-    # build json
-    # return
-
-
-# occupation categories
-# field of study categories
-# location
-# age
-
-# value
-# totals
-# ratios
-
-
-# given a field of study
-    # return the top 10 industries by total, ratio
-
-# denominators can be found by walking up the category tree.
-
-# note that you have to limit some variables:
-
-# code2015=# SELECT SUM(observation_value) FROM data WHERE GEO=1 AND NOC2011=1 AND CIP2011_4=1 AND AGE=1 AND (HCDD_14V=2 OR HCDD_14V=3 OR HCDD_14V=4);
 
 
 if __name__ == '__main__':
