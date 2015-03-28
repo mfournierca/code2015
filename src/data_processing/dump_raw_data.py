@@ -1,11 +1,13 @@
 """Dump the raw XML data into a tabular format.
 
 Usage:
-    dump_raw_data.py csv <archive_path> <output_file> [options]
-    dump_raw_data.py postgresql <archive_path> [options]
+    dump_raw_data.py csv <archive_path> <category_mapping_file> <output_file> [options]
+    dump_raw_data.py postgresql <archive_path> <category_mapping_file> [options]
 
 Arguments:
     <archive_path>  The path to the zip archive containing the raw data.
+    <category_mapping_file>  Path to the category mapping, created by the 
+                             build_legend script.
     <output_file>   Path to write the csv file to 
 
 Options:
@@ -21,6 +23,7 @@ import psycopg2
 import zipfile
 import datetime
 import re
+import json
 
 from src.constants import NAMESPACES, ZIP_DATA_PATH
 from src.db import get_cursor, insert_dict
@@ -31,25 +34,34 @@ TIME_TAG = "{%s}Time" % NAMESPACES["generic"]
 OBSVALUE_TAG = "{%s}ObsValue" % NAMESPACES["generic"]
 
 
-def _set_cats(d, category_prefix, cat1, cat2, cat3):
-    d["{0}_cat1".format(category_prefix)] = cat1
-    d["{0}_cat2".format(category_prefix)] = cat2
-    d["{0}_cat3".format(category_prefix)] = cat3
+def _set_cats(d, category_prefix, cat1, cat2, cat3, cat4):
+    d["{0}_cat1".format(category_prefix)] = cat1 if cat1 else None 
+    d["{0}_cat2".format(category_prefix)] = cat2 if cat2 else None
+    d["{0}_cat3".format(category_prefix)] = cat3 if cat3 else None
+    d["{0}_cat4".format(category_prefix)] = cat4 if cat4 else None
     return d
 
 
-def _subcategorize_column(d, column_name, category_prefix):
-    cat = d[column_name]
-    if len(cat) == 1:
-        d = _set_cats(d, category_prefix, cat, None, None)
-    if len(cat) == 2:
-        d = _set_cats(d, category_prefix, cat[0], cat, None)
-    if len(cat) == 3:
-        d = _set_cats(d, category_prefix, cat[0], cat[:2], cat)
-    return d
+def _subcategorize_noc(row, category_key, category_mapping):
+    i = str(category_mapping["NOC2011"][category_key]["category_id"])
+    if len(i) == 1:
+        row = _set_cats(row, "occupation", i[0], None, None, None)
+    elif len(i) == 2:
+        row = _set_cats(row, "occupation", i[0], i[:2], None, None)
+    elif len(i) == 3:
+        row = _set_cats(row, "occupation", i[0], i[:2], i[:3], None)
+    elif len(i) == 4:
+        row = _set_cats(row, "occupation", i[0], i[:2], i[:3], i[:4])
+    else:
+        row = _set_cats(row, "occupation", None, None, None, None)
+    return row
 
-
-def generate_raw_data(input_handle, limit=None, track_memory_usage=False):
+def generate_raw_data(
+        input_handle,  
+        category_mapping=None,
+        limit=None, 
+        track_memory_usage=False
+    ):
 
     starttime = datetime.datetime.utcnow()
     counter = 0
@@ -76,10 +88,6 @@ def generate_raw_data(input_handle, limit=None, track_memory_usage=False):
                     row["time"] = e.text
                 elif e.tag == OBSVALUE_TAG:
                     row["observation_value"] = e.get("value")
-
-            # extract sub categories 
-            row = _subcategorize_column(row, "NOC2011", "occupation")
-            # row = _subcategorize_column(row, "CIP2011_4", "field_of_study")
 
         else:
             continue
@@ -121,13 +129,18 @@ def generate_raw_data(input_handle, limit=None, track_memory_usage=False):
         if row["AGE"] != "1": 
             continue
 
+        # extract sub categories
+        if category_mapping is not None:
+            row = _subcategorize_noc(row, row["NOC2011"], category_mapping)
+        
         counter += 1
         yield row
 
 
-def get_fieldnames(input_file): 
+def get_fieldnames(input_file, category_mapping): 
     input_handle = get_input_from_zip(input_file)
-    g = generate_raw_data(input_handle, limit=1)
+    g = generate_raw_data(
+        input_handle, limit=1, category_mapping=category_mapping)
     k = g.next().keys()
     return k
 
@@ -137,15 +150,18 @@ def get_input_from_zip(archive_path):
     return z.open(ZIP_DATA_PATH)
 
 
-def run_csv(input_file, output_file, limit=None):
-    fieldnames = get_fieldnames(input_file) 
+def run_csv(input_file, category_file, output_file, limit=None):
+    category_mapping = json.loads("".join(open(category_file, "r")))   
     
     input_handle = get_input_from_zip(input_file) 
+    
+    fieldnames = get_fieldnames(input_file, category_mapping) 
     output_handle = open(output_file, "w")
     output_writer = csv.DictWriter(output_handle, fieldnames=fieldnames)
     output_writer.writeheader()
-    
-    g = generate_raw_data(input_handle, limit=limit)
+ 
+    g = generate_raw_data(
+        input_handle, limit=limit, category_mapping=category_mapping)
     for r in g:
         output_writer.writerow(r)
     
@@ -153,10 +169,13 @@ def run_csv(input_file, output_file, limit=None):
     output_handle.close()
 
 
-def run_postgresql(input_file, limit=None):
+def run_postgresql(input_file, category_file, limit=None):
+    category_mapping = json.loads("".join(open(category_file, "r")))   
+    
     with get_input_from_zip(input_file) as input_handle:
         cur = get_cursor()
-        g = generate_raw_data(input_handle, limit=limit)
+        g = generate_raw_data(
+            input_handle, limit=limit, category_mapping=category_mapping)
         for r in g:
             insert_dict(cur, r)
         cur.close()
@@ -171,9 +190,14 @@ if __name__ == "__main__":
     if args["csv"]:
         run_csv(
             args["<archive_path>"], 
+            args["<category_mapping_file>"],
             args["<output_file>"], 
             limit=limit
         )
     elif args["postgresql"]:
-        run_postgresql(args["<archive_path>"], limit=limit)
+        run_postgresql(
+            args["<archive_path>"], 
+            args["<category_mapping_file>"],
+            limit=limit
+        )
 
