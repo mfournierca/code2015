@@ -71,7 +71,7 @@ def _parse_codelist(document, codelist_id, extract_category_id=False):
             "subcategories": []
         }
 
-    return _gather_codelist(legend)
+    return legend
 
 
 def _sort_subcategories(l): 
@@ -89,7 +89,7 @@ def _gather_codelist(codelist):
       
     l = {"category_id": None, "subcategories": []}
 
-    for k, c in codelist.iteritems():
+    for category_key, c in codelist.iteritems():
 
         keys = []
         if c.get("category_id", "").find(".") == -1:
@@ -118,14 +118,33 @@ def _gather_codelist(codelist):
                 nl = kl[0]
 
         nl["category_name"] = c.get("category_name")
-        nl["category_key"] = k
+        nl["category_key"] = category_key
    
     l = _sort_subcategories(l) 
     return l
 
-    
-def parse_legend_document(d):
+
+def _parse_legend(document, codelist_id, extract_category_id=False):
+    legend = _parse_codelist(
+        document, codelist_id, extract_category_id=extract_category_id)
+    return _gather_codelist(legend)
+   
+ 
+def parse_full_legend(d):
     legend = {
+        "GEO": _parse_legend(d, "CL_GEO"),
+        "CIP2011_4": _parse_legend(
+            d, "CL_CIP2011_4", extract_category_id=True
+        ),
+        "AGE": _parse_legend(d, "CL_AGE"),
+        "NOC2011": _parse_legend(d, "CL_NOC2011", extract_category_id=True),
+        "HCDD_14V": _parse_legend(d, "CL_HCDD_14V")
+    }
+    return legend
+
+
+def parse_full_category_mapping(d):
+    category_mapping = {
         "GEO": _parse_codelist(d, "CL_GEO"),
         "CIP2011_4": _parse_codelist(
             d, "CL_CIP2011_4", extract_category_id=True
@@ -134,24 +153,28 @@ def parse_legend_document(d):
         "NOC2011": _parse_codelist(d, "CL_NOC2011", extract_category_id=True),
         "HCDD_14V": _parse_codelist(d, "CL_HCDD_14V")
     }
-    return legend
+    return category_mapping
 
 
-def parse_legend_file(f):
-    doc = etree.parse(f)
-    legend = parse_legend_document(doc)
-    return legend
-
-
-def run(input_file, output_file):
-    legend = parse_legend_file(input_file)
-    with open(output_file, "w") as f:
+def run_document(document, legend_file, category_mapping_file):
+    legend = parse_full_legend(document)
+    with open(legend_file, "w") as f:
         f.write(json.dumps(legend, indent=2))
+    
+    category_mapping = parse_full_category_mapping(document)
+    with open(category_mapping_file, "w") as f:
+        f.write(json.dumps(category_mapping, indent=2))
+
+
+def run(input_file, legend_file, category_mapping_file): 
+    doc = etree.parse(input_file) 
+    run_document(doc, legend_file, category_mapping_file)
 
 
 if __name__ == "__main__":
     args = docopt(__doc__)
     run(
         args["<structure_file>"],
-        args["<legend_file>"]
+        args["<legend_file>"], 
+        args["<category_map_file>"]
     )
