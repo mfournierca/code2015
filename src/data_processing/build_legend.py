@@ -155,6 +155,9 @@ def parse_full_category_mapping(d):
         "CIP2011_4": _parse_category_mapping(
             d, "CL_CIP2011_4", extract_category_id=True
         ),
+        "NOC2011": _parse_category_mapping(
+            d, "CL_NOC2011", extract_category_id=True
+        )
     }
     return category_mapping
 
