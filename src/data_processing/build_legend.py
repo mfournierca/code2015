@@ -4,14 +4,15 @@ The legend is a dictionary. The dictionary maps between the different id values
 found in the data set and their plain-text equivalent.
 
 Usage:
-    build_legend.py <structure_file> <legend_file> <category_map_file> [options]
+    build_legend.py <structure_file> <category_map_json> <cip_map_csv> [options]
 
 Arguments:
     <structure_file>  structure file that came with the dataset
-    <legend_file>     output file for the legend, a nested dictionary of 
-                      categories
-    <category_map_file>  output file for the category mapping, a dictionary
+    <category_map_json>  output file for the category mapping, a dictionary
                          mapping category keys to ids
+    <cip_map_csv>        output file for the CIP category mapping, a csv 
+                         containing the category name and id of each field
+                         of education
     --help            show this help page
 """
 
@@ -19,6 +20,7 @@ from lxml import etree
 from docopt import docopt
 from collections import defaultdict
 
+import csv
 import json
 
 from src.constants import NAMESPACES
@@ -41,7 +43,11 @@ def _get_next_unique_nocat_id():
         yield "nocategory.{0}".format(start)
 
 
-def _parse_codelist(document, codelist_id, extract_category_id=False):
+def _parse_codelist(
+        document, 
+        codelist_id, 
+        extract_category_id=False
+    ):
     legend = {}
     entries = document.xpath(
         "//structure:CodeList[@id='{0}']/structure:Code".format(codelist_id),
@@ -162,25 +168,35 @@ def parse_full_category_mapping(d):
     return category_mapping
 
 
-def run_document(document, legend_file, category_mapping_file):
-    legend = parse_full_legend(document)
-    with open(legend_file, "w") as f:
-        f.write(json.dumps(legend, indent=2))
+def run_document(
+        document, 
+        category_mapping_json, 
+        cip_mapping_csv
+    ):
     
     category_mapping = parse_full_category_mapping(document)
-    with open(category_mapping_file, "w") as f:
+    with open(category_mapping_json, "w") as f:
         f.write(json.dumps(category_mapping, indent=2))
+   
+    cip_mapping = category_mapping["CIP2011_4"]
+    fieldnames = ["category_key", "category_id", "category_name"]
+    f = csv.DictWriter(open(cip_mapping_csv, "w"), fieldnames)
+    f.writeheader() 
+    for n, d in cip_mapping.iteritems():            
+        d = {k: v.encode("utf-8") for k, v in d.items() if k != "subcategories"}
+        d["category_key"] = n
+        f.writerow(d)
 
 
-def run(input_file, legend_file, category_mapping_file): 
+def run(input_file, category_mapping_json, cip_mapping_csv): 
     doc = etree.parse(input_file) 
-    run_document(doc, legend_file, category_mapping_file)
+    run_document(doc, category_mapping_json, cip_mapping_csv)
 
 
 if __name__ == "__main__":
     args = docopt(__doc__)
     run(
         args["<structure_file>"],
-        args["<legend_file>"], 
-        args["<category_map_file>"]
+        args["<category_map_json>"], 
+        args["<cip_map_csv>"]
     )
