@@ -36,12 +36,18 @@ function(input, output) {
             select(observation_value, category_name) 
        
         # prevent ggplot from ordering the x axis alphabetically
-        p$category_name <- factor(p$category_name, levels=p$category_name, ordered=TRUE)
+        p$category_name <- factor(
+            p$category_name, 
+            levels=p$category_name, ordered=TRUE
+        )
 
         # plot
         p %>% ggplot(aes(x=category_name, y=observation_value)) + 
         geom_bar(stat="identity") +
-        theme(axis.text.x=element_text(angle=30, hjust=1), plot.margin=unit(c(0, 0, 0, 0), "cm"))
+        theme(
+            axis.text.x=element_text(angle=30, hjust=1), 
+            plot.margin=unit(c(0, 0, 0, 0), "cm")
+        )
 
     })
 }
