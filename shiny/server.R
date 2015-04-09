@@ -34,9 +34,6 @@ function(input, output) {
             # discard unused columns
             select(observation_value, category_name) 
        
-        # debug
-        print(p)
-
         # prevent ggplot from ordering the x axis alphabetically
         p$category_name <- factor(p$category_name, levels=p$category_name, ordered=TRUE)
 
