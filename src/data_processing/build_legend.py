@@ -159,7 +159,7 @@ def _parse_category_mapping(document, codelist_id, extract_category_id=False):
 def parse_full_category_mapping(d):
     category_mapping = {
         "CIP2011_4": _parse_category_mapping(
-            d, "CL_CIP2011_4", extract_category_id=True
+            d, "CL_CIP2011_4"
         ),
         "NOC2011": _parse_category_mapping(
             d, "CL_NOC2011", extract_category_id=True
