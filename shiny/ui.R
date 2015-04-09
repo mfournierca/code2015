@@ -1,7 +1,8 @@
 library(shiny)
 
 cip <- read.csv("../data/cip_mapping.csv")
-cip <- cip[order(category_name), ]
+cip <- cip[order(cip$category_name), ]
+
 
 # Define the overall UI
 
