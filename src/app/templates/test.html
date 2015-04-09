@@ -1,0 +1,55 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>  
+    <script type="text/javascript">
+    
+    var json = {% autoescape false %} {{ test }} {% endautoescape %};
+    var dataPoints = JSON.parse(json);
+
+    window.onload = function () {
+        var chart = new CanvasJS.Chart("chartContainer", {
+
+            title:{
+                text:"Fortune Global 500 Companies by Country"              
+
+            },
+                        animationEnabled: true,
+            axisX:{
+                interval: 1,
+                gridThickness: 0,
+                labelFontSize: 10,
+                labelFontStyle: "normal",
+                labelFontWeight: "normal",
+                labelFontFamily: "Lucida Sans Unicode"
+
+            },
+            axisY2:{
+                interlacedColor: "rgba(1,77,101,.2)",
+                gridColor: "rgba(1,77,101,.1)"
+
+            },
+
+            data: [
+            {     
+                type: "bar",
+                name: "companies",
+                axisYType: "secondary",
+                color: "#014D65",               
+                dataPoints: dataPoints
+            }
+            
+            ]
+        });
+
+chart.render();
+}
+</script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/canvasjs/1.4.1/canvas.min.js"></script>
+</head>
+<body>
+    <div id="chartContainer" style="height: 300px; width: 100%;">
+    </div>
+</body>
+</html>
+

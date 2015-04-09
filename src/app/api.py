@@ -10,6 +10,7 @@ Arguments:
 from flask import Flask
 from flask import request
 from flask import g
+from flask import render_template
 
 from docopt import docopt
 
@@ -95,15 +96,21 @@ def rank():
     q = build_rank_query(g.d)    
     g.cur.execute(q)
     
-    result = {"rank": []}
+    result =  []
     for r in g.cur.fetchall():
         n = CATEGORY_MAPPING["NOC2011"][str(r[0])]
-        result["rank"].append({
-            "name": n["category_name"], 
-            "count": r[1]
+        result.append({
+            "label": str(n["category_name"]), 
+            "y": str(r[1])
         })
     return str(result)
 
+
+@app.route("/test_template")
+def test_template():
+    print(json.dumps(rank())) 
+    return render_template("test.html", **{"test": json.dumps(rank())})
+    
 
 if __name__ == '__main__':
     args = docopt(__doc__)
