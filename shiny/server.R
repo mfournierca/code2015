@@ -1,6 +1,7 @@
 library(shiny)
 library(dplyr)
 library(ggplot2)
+library(grid)
 
 cipdf <- read.csv("../data/cip_mapping.csv")
 nocdf <- read.csv("../data/noc_mapping.csv")
@@ -40,8 +41,7 @@ function(input, output) {
         # plot
         p %>% ggplot(aes(x=category_name, y=observation_value)) + 
         geom_bar(stat="identity") +
-        theme(axis.text.x = element_text(angle = 30, hjust = 1))
-    
+        theme(axis.text.x=element_text(angle=30, hjust=1), plot.margin=unit(c(0, 0, 0, 0), "cm"))
 
     })
 }
