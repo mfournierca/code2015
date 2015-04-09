@@ -9,8 +9,6 @@ datadf <- read.csv("../data/dump.csv")
 
 colnames(nocdf)[which(names(nocdf) == "category_key")] <- "NOC2011"
 
-head(datadf)
-
 # Define a server for the Shiny app
 function(input, output) {
 
