@@ -1,30 +1,35 @@
 library(shiny)
 
 cip <- read.csv("../data/cip_mapping.csv")
+cip <- cip[order(category_name), ]
 
 # Define the overall UI
 
-fluidPage(    
-  
-  # Give the page a title
-  titlePanel("Occupation by Education Category"),
-  
-  # Generate a row with a sidebar
-  sidebarLayout(      
+fluidPage(      
     
-    # Define the sidebar with one input
-    sidebarPanel(
-      selectInput("cip", "Field of Education: ", 
-                  choices=as.vector(cip$category_name)),
-      hr(),
-      helpText("Select a field of education.")
-    ),
+    # Give the page a title
+    titlePanel("Occupation by Education Category"),
     
-    # Create a spot for the barplot
-    mainPanel(
-      plotOutput("nocPlot")  
+    # Generate a row with a sidebar
+    sidebarLayout(      
+      
+        # Define the sidebar with one input
+        sidebarPanel(
+            selectInput(
+                "cip", 
+                "Field of Education: ", 
+                choices=as.vector(cip$category_name),
+                width="100%"
+            ),
+            hr(),
+            helpText("Select a field of education.")
+        ),
+
+        # Create a spot for the barplot
+        mainPanel(
+            plotOutput("nocPlot")  
+        )
     )
-  )
 )
 
 
