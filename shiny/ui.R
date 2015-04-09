@@ -29,7 +29,9 @@ fluidPage(
         # Create a spot for the barplot
         mainPanel(
             plotOutput("nocPlot")  
-        )
+        ),
+
+        fluid=TRUE
     )
 )
 
