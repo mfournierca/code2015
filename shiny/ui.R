@@ -1,6 +1,6 @@
 library(shiny)
 
-cip <- read.csv("../data/cip_mapping.csv")
+cip <- read.csv("data/cip_mapping.csv")
 cip <- cip[order(cip$category_name), ]
 cip <- cip[grep("^[1234567890]", cip$category_name), ]
 
