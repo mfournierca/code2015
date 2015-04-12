@@ -52,6 +52,8 @@ function(input, output) {
         # plot
         p %>% ggplot(aes(x=category_name, y=observation_value)) + 
         geom_bar(stat="identity") +
+        xlab("") + 
+        ylab("") + 
         theme(
             axis.text.x=element_text(angle=45, hjust=1), 
             plot.margin=unit(c(0, 0, 0, 0), "cm")
