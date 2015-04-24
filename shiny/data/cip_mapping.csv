@@ -1,0 +1,433 @@
+category_key,category_id,category_name
+344,nocategory.344,01.04 Agricultural and food products processing
+345,nocategory.345,01.05 Agricultural and domestic animal services
+346,nocategory.346,01.06 Applied horticulture/horticultural business services
+347,nocategory.347,01.07 International agriculture
+340,nocategory.340,"01.00 Agriculture, general"
+341,nocategory.341,01.01 Agricultural business and management
+342,nocategory.342,01.02 Agricultural mechanization
+343,nocategory.343,01.03 Agricultural production operations
+348,nocategory.348,01.08 Agricultural public services
+349,nocategory.349,01.09 Animal sciences
+298,nocategory.298,15.03 Electrical and electronic engineering technologies/technicians
+299,nocategory.299,15.04 Electromechanical and instrumentation and maintenance technologies/technicians
+296,nocategory.296,15.01 Architectural engineering technology/technician
+297,nocategory.297,15.02 Civil engineering technology/technician
+294,nocategory.294,15. Engineering technologies and engineering-related fields
+295,nocategory.295,"15.00 Engineering technology, general"
+292,nocategory.292,14.45 Biological/biosystems engineering
+293,nocategory.293,"14.99 Engineering, other"
+290,nocategory.290,14.43 Biochemical engineering
+291,nocategory.291,14.44 Engineering chemistry
+199,nocategory.199,30.18 Natural sciences
+198,nocategory.198,30.01 Biological and physical sciences
+195,nocategory.195,26.14 Molecular medicine
+194,nocategory.194,"26.13 Ecology, evolution, systematics and population biology"
+197,nocategory.197,"26.99 Biological and biomedical sciences, other"
+196,nocategory.196,26.15 Neurobiology and neurosciences
+191,nocategory.191,26.10 Pharmacology and toxicology
+190,nocategory.190,"26.09 Physiology, pathology and related sciences"
+193,nocategory.193,26.12 Biotechnology
+192,nocategory.192,"26.11 Biomathematics, bioinformatics, and computational biology"
+270,nocategory.270,14.19 Mechanical engineering
+271,nocategory.271,14.20 Metallurgical engineering
+272,nocategory.272,14.21 Mining and mineral engineering
+273,nocategory.273,14.22 Naval architecture and marine engineering
+274,nocategory.274,14.23 Nuclear engineering
+275,nocategory.275,14.24 Ocean engineering
+276,nocategory.276,14.25 Petroleum engineering
+277,nocategory.277,14.27 Systems engineering
+278,nocategory.278,14.28 Textile sciences and engineering
+279,nocategory.279,14.32 Polymer/plastics engineering
+108,nocategory.108,19.09 Apparel and textiles
+109,nocategory.109,"19.99 Family and consumer sciences/human sciences, other"
+102,nocategory.102,"19.01 Family and consumer sciences/human sciences, general"
+103,nocategory.103,19.02 Family and consumer sciences/human sciences business services
+100,nocategory.100,19. Family and consumer sciences/human sciences
+101,nocategory.101,19.00 Work and family studies
+106,nocategory.106,19.06 Housing and human environments
+107,nocategory.107,"19.07 Human development, family studies and related services"
+104,nocategory.104,19.04 Family and consumer economics and related services
+105,nocategory.105,"19.05 Foods, nutrition and related services"
+39,nocategory.39,"16.01 Linguistic, comparative and related language studies and services"
+38,nocategory.38,"16. Aboriginal and foreign languages, literatures and linguistics"
+33,nocategory.33,50.07 Fine arts and art studies
+32,nocategory.32,50.06 Film/video and photographic arts
+31,nocategory.31,50.05 Drama/theatre arts and stagecraft
+30,nocategory.30,50.04 Design and applied arts
+37,nocategory.37,Humanities
+36,nocategory.36,"50.99 Visual and performing arts, other"
+35,nocategory.35,"50.10 Arts, entertainment, and media management"
+34,nocategory.34,50.09 Music
+432,nocategory.432,"30.99 Multidisciplinary/interdisciplinary studies, other"
+430,nocategory.430,"49.99 Transportation and materials moving, other"
+431,nocategory.431,Other
+339,nocategory.339,"01. Agriculture, agriculture operations and related sciences"
+338,nocategory.338,"Agriculture, natural resources and conservation"
+335,nocategory.335,48.07 Woodworking
+334,nocategory.334,48.05 Precision metal working
+337,nocategory.337,"48.99 Precision production, other"
+336,nocategory.336,48.08 Boilermaking/boilermaker
+331,nocategory.331,48. Precision production
+330,nocategory.330,"47.99 Mechanic and repair technologies/technicians, other"
+333,nocategory.333,48.03 Leatherworking and upholstery
+332,nocategory.332,"48.00 Precision production trades, general"
+6,nocategory.6,"13.02 Bilingual, multilingual and multicultural education"
+99,nocategory.99,"09.99 Communication, journalism and related programs, other"
+98,nocategory.98,09.10 Publishing
+91,nocategory.91,"05.02 Ethnic, cultural minority, gender, and group studies"
+90,nocategory.90,05.01 Area studies
+93,nocategory.93,"09. Communication, journalism and related programs"
+92,nocategory.92,"05.99 Area, ethnic, cultural, gender, and group studies, other"
+95,nocategory.95,09.04 Journalism
+94,nocategory.94,09.01 Communication and media studies
+97,nocategory.97,"09.09 Public relations, advertising and applied communication"
+96,nocategory.96,"09.07 Radio, television and digital communication"
+238,nocategory.238,27.05 Statistics
+239,nocategory.239,"27.99 Mathematics and statistics, other"
+234,nocategory.234,"25.99 Library science, other"
+235,nocategory.235,27. Mathematics and statistics
+236,nocategory.236,27.01 Mathematics
+237,nocategory.237,27.03 Applied mathematics
+230,nocategory.230,"11.99 Computer and information sciences and support services, other"
+231,nocategory.231,25. Library science
+232,nocategory.232,25.01 Library science and administration
+233,nocategory.233,25.03 Library and archives assisting
+1,nocategory.1,Total - Major field of study - Classification of Instructional Programs (CIP) 2011
+146,nocategory.146,45.13 Sociology and anthropology
+147,nocategory.147,45.14 Rural sociology
+144,nocategory.144,45.11 Sociology
+145,nocategory.145,45.12 Urban studies/affairs
+142,nocategory.142,45.09 International relations and national security studies
+143,nocategory.143,45.10 Political science and government
+140,nocategory.140,45.06 Economics
+141,nocategory.141,45.07 Geography and cartography
+148,nocategory.148,"45.99 Social sciences, other"
+149,nocategory.149,"Business, management and public administration"
+133,nocategory.133,"42.99 Psychology, other"
+132,nocategory.132,"42.28 Clinical, counselling and applied psychology"
+131,nocategory.131,42.27 Research and experimental psychology
+130,nocategory.130,"42.01 Psychology, general"
+137,nocategory.137,45.03 Archaeology
+136,nocategory.136,45.02 Anthropology
+135,nocategory.135,"45.01 Social sciences, general"
+134,nocategory.134,45. Social sciences
+139,nocategory.139,45.05 Demography and population studies
+138,nocategory.138,45.04 Criminology
+24,nocategory.24,10.03 Graphic communications
+25,nocategory.25,"10.99 Communications technologies/technicians and support services, other"
+26,nocategory.26,50. Visual and performing arts
+27,nocategory.27,"50.01 Visual, digital and performing arts, general"
+20,nocategory.20,"Visual and performing arts, and communications technologies"
+21,nocategory.21,10. Communications technologies/technicians and support services
+22,nocategory.22,10.01 Communications technology/technician
+23,nocategory.23,10.02 Audiovisual communications technologies/technicians
+28,nocategory.28,"50.02 Crafts/craft design, folk art and artisanry"
+29,nocategory.29,50.03 Dance
+407,nocategory.407,60.04 Medical residency programs - general certificates
+406,nocategory.406,60.03 Veterinary residency programs
+405,nocategory.405,60.01 Dental residency programs
+404,nocategory.404,"60. Dental, medical and veterinary residency programs"
+403,nocategory.403,"51.99 Health professions and related clinical sciences, other"
+402,nocategory.402,"51.39 Practical nursing, vocational nursing and nursing assistants"
+401,nocategory.401,"51.38 Registered nursing, nursing administration, nursing research and clinical nursing"
+400,nocategory.400,51.37 Energy-based and biologically-based therapies
+409,nocategory.409,60.06 Podiatric medicine residency programs
+408,nocategory.408,60.05 Medical residency programs - subspecialty certificates
+379,nocategory.379,51.11 Health/medical preparatory programs
+378,nocategory.378,51.10 Clinical/medical laboratory science/research and allied professions
+371,nocategory.371,51.02 Communication disorders sciences and services
+370,nocategory.370,51.01 Chiropractic (DC)
+373,nocategory.373,"51.05 Advanced/graduate dentistry and oral sciences (Cert., MS, MSc, PhD)"
+372,nocategory.372,"51.04 Dentistry (DDS, DMD)"
+375,nocategory.375,51.07 Health and medical administrative services
+374,nocategory.374,51.06 Dental support services and allied professions
+377,nocategory.377,"51.09 Allied health diagnostic, intervention and treatment professions"
+376,nocategory.376,51.08 Allied health and medical assisting services
+393,nocategory.393,51.27 Medical illustration and informatics
+392,nocategory.392,51.26 Health aides/attendants/orderlies
+88,nocategory.88,Social and behavioural sciences and law
+89,nocategory.89,"05. Area, ethnic, cultural, gender, and group studies"
+397,nocategory.397,51.34 Alternative and complementary medical support services
+396,nocategory.396,51.33 Alternative and complementary medicine and medical systems
+395,nocategory.395,51.32 Bioethics/medical ethics
+394,nocategory.394,51.31 Dietetics and clinical nutrition services
+82,nocategory.82,54.01 History
+83,nocategory.83,55. French language and literature/letters
+80,nocategory.80,"39.99 Theology and religious vocations, other"
+81,nocategory.81,54. History
+86,nocategory.86,55.14 French literature
+87,nocategory.87,"55.99 French language and literature/letters, other"
+84,nocategory.84,"55.01 French language and literature, general"
+85,nocategory.85,55.13 French rhetoric and composition/writing studies
+7,nocategory.7,13.03 Curriculum and instruction
+245,nocategory.245,"04.02 Architecture (BArch, BA, BS, BSc, MArch, MA, MS, MSc, PhD)"
+244,nocategory.244,04. Architecture and related services
+247,nocategory.247,04.04 Environmental design/architecture
+246,nocategory.246,"04.03 City/urban, community and regional planning"
+241,nocategory.241,30.08 Mathematics and computer science
+240,nocategory.240,30.06 Systems science and theory
+243,nocategory.243,"Architecture, engineering, and related technologies"
+242,nocategory.242,30.30 Computational science
+249,nocategory.249,"04.06 Landscape architecture (BS, BSc, BSLA, BLA, MSLA, MLA, PhD)"
+248,nocategory.248,04.05 Interior architecture
+179,nocategory.179,52.21 Telecommunications management
+178,nocategory.178,52.20 Construction management
+177,nocategory.177,"52.19 Specialized sales, merchandising and marketing operations"
+176,nocategory.176,"52.18 General sales, merchandising and related marketing operations"
+175,nocategory.175,52.17 Insurance
+174,nocategory.174,52.16 Taxation
+173,nocategory.173,52.15 Real estate
+172,nocategory.172,52.14 Marketing
+171,nocategory.171,52.13 Management sciences and quantitative methods
+170,nocategory.170,52.12 Management information systems and services
+253,nocategory.253,"04.99 Architecture and related services, other"
+182,nocategory.182,26. Biological and biomedical sciences
+183,nocategory.183,"26.01 Biology, general"
+180,nocategory.180,"52.99 Business, management, marketing and related support services, other"
+181,nocategory.181,Physical and life sciences and technologies
+186,nocategory.186,26.04 Cell/cellular biology and anatomical sciences
+187,nocategory.187,26.05 Microbiological sciences and immunology
+184,nocategory.184,26.02 Biochemistry/biophysics and molecular biology
+185,nocategory.185,26.03 Botany/plant biology
+188,nocategory.188,26.07 Zoology/animal biology
+189,nocategory.189,26.08 Genetics
+11,nocategory.11,13.07 International and comparative education
+10,nocategory.10,"13.06 Educational assessment, evaluation and research"
+13,nocategory.13,13.10 Special education and teaching
+12,nocategory.12,13.09 Social and philosophical foundations of education
+15,nocategory.15,"13.12 Teacher education and professional development, specific levels and methods"
+14,nocategory.14,13.11 Student counselling and personnel services
+17,nocategory.17,13.14 Teaching English or French as a second or foreign language
+16,nocategory.16,"13.13 Teacher education and professional development, specific subject areas"
+19,nocategory.19,"13.99 Education, other"
+18,nocategory.18,13.15 Teaching assistants/aides
+62,nocategory.62,"24. Liberal arts and sciences, general studies and humanities"
+322,nocategory.322,47. Mechanic and repair technologies/technicians
+323,nocategory.323,"47.00 Mechanics and repairers, general"
+320,nocategory.320,46.05 Plumbing and related water supply services
+321,nocategory.321,"46.99 Construction trades, other"
+326,nocategory.326,47.03 Heavy/industrial equipment maintenance technologies
+327,nocategory.327,47.04 Precision systems maintenance and repair technologies
+324,nocategory.324,47.01 Electrical/electronics maintenance and repair technology
+325,nocategory.325,"47.02 Heating, air conditioning, ventilation and refrigeration maintenance technology/technician"
+328,nocategory.328,47.05 Stationary energy sources installer and operator
+329,nocategory.329,47.06 Vehicle maintenance and repair technologies
+201,nocategory.201,30.27 Human biology
+200,nocategory.200,30.19 Nutrition sciences
+203,nocategory.203,40. Physical sciences
+202,nocategory.202,30.32 Marine sciences
+205,nocategory.205,40.02 Astronomy and astrophysics
+204,nocategory.204,"40.01 Physical sciences, general"
+207,nocategory.207,40.05 Chemistry
+206,nocategory.206,40.04 Atmospheric sciences and meteorology
+209,nocategory.209,40.08 Physics
+208,nocategory.208,40.06 Geological and Earth sciences/geosciences
+77,nocategory.77,39.05 Religious/sacred music
+76,nocategory.76,39.04 Religious education
+75,nocategory.75,39.03 Missions/missionary studies and missiology
+74,nocategory.74,39.02 Bible/Biblical studies
+73,nocategory.73,39. Theology and religious vocations
+72,nocategory.72,"38.99 Philosophy and religious studies, other"
+71,nocategory.71,38.02 Religion/religious studies
+70,nocategory.70,"38.01 Philosophy, logic and ethics"
+79,nocategory.79,39.07 Pastoral counselling and specialized ministries
+78,nocategory.78,39.06 Theological and ministerial studies
+2,nocategory.2,"No postsecondary certificate, diploma or degree"
+8,nocategory.8,13.04 Educational administration and supervision
+68,nocategory.68,38. Philosophy and religious studies
+120,nocategory.120,"30.15 Science, technology and society"
+121,nocategory.121,30.17 Behavioural sciences
+122,nocategory.122,30.20 International/global studies
+123,nocategory.123,30.23 Intercultural/multicultural and diversity studies
+124,nocategory.124,30.25 Cognitive science
+125,nocategory.125,30.26 Cultural studies/critical theory and analysis
+126,nocategory.126,30.28 Dispute resolution
+127,nocategory.127,30.31 Human computer interaction
+128,nocategory.128,30.33 Sustainability studies
+129,nocategory.129,42. Psychology
+414,nocategory.414,12.04 Cosmetology and related personal grooming services
+415,nocategory.415,12.05 Culinary arts and related services
+416,nocategory.416,"12.99 Personal and culinary services, other"
+417,nocategory.417,"28. Military science, leadership and operational art"
+410,nocategory.410,"60.99 Dental, medical and veterinary residency programs, other"
+411,nocategory.411,"Personal, protective and transportation services"
+412,nocategory.412,12. Personal and culinary services
+413,nocategory.413,12.03 Funeral service and mortuary science
+418,nocategory.418,"28.08 Military science, leadership and operational art"
+419,nocategory.419,29. Military technologies and applied sciences
+319,nocategory.319,"46.04 Building/construction finishing, management and inspection"
+318,nocategory.318,46.03 Electrical and power transmission installers
+313,nocategory.313,30.12 Historic preservation and conservation
+312,nocategory.312,"15.99 Engineering technologies and engineering-related fields, other"
+311,nocategory.311,15.16 Nanotechnology
+310,nocategory.310,15.15 Engineering-related fields
+317,nocategory.317,46.02 Carpentry/carpenter
+316,nocategory.316,46.01 Masonry/mason
+315,nocategory.315,"46.00 Construction trades, general"
+314,nocategory.314,46. Construction trades
+3,nocategory.3,Education
+368,nocategory.368,51. Health professions and related programs
+369,nocategory.369,"51.00 Health services/allied health/health sciences, general"
+366,nocategory.366,31.06 Outdoor education
+367,nocategory.367,"31.99 Parks, recreation, leisure and fitness studies, other"
+364,nocategory.364,"31.03 Parks, recreation and leisure facilities management"
+365,nocategory.365,31.05 Health and physical education/fitness
+362,nocategory.362,"31. Parks, recreation, leisure and fitness studies"
+363,nocategory.363,"31.01 Parks, recreation and leisure studies"
+360,nocategory.360,"03.99 Natural resources and conservation, other"
+361,nocategory.361,Health and related fields
+380,nocategory.380,51.12 Medicine (MD)
+381,nocategory.381,"51.14 Medical scientist (MS, MSc, PhD)"
+382,nocategory.382,51.15 Mental and social health services and allied professions
+383,nocategory.383,51.17 Optometry (OD)
+384,nocategory.384,51.18 Ophthalmic and optometric support services and allied professions
+385,nocategory.385,51.19 Osteopathic medicine/osteopathy (DO)
+386,nocategory.386,"51.20 Pharmacy, pharmaceutical sciences and administration"
+387,nocategory.387,51.21 Podiatric medicine/podiatry (DPM)
+388,nocategory.388,51.22 Public health
+389,nocategory.389,51.23 Rehabilitation and therapeutic professions
+60,nocategory.60,23.14 English literature
+61,nocategory.61,"23.99 English language and literature/letters, other"
+258,nocategory.258,14.04 Architectural engineering
+259,nocategory.259,14.05 Bioengineering and biomedical engineering
+64,nocategory.64,30.13 Medieval and renaissance studies
+65,nocategory.65,30.21 Holocaust and related studies
+66,nocategory.66,30.22 Classical and ancient studies
+67,nocategory.67,30.29 Maritime studies
+252,nocategory.252,04.10 Real estate development
+69,nocategory.69,"38.00 Philosophy and religious studies, general"
+250,nocategory.250,04.08 Architectural history and criticism
+251,nocategory.251,04.09 Architectural sciences and technology
+256,nocategory.256,"14.02 Aerospace, aeronautical and astronautical/space engineering"
+257,nocategory.257,14.03 Agricultural engineering
+254,nocategory.254,14. Engineering
+255,nocategory.255,"14.01 Engineering, general"
+168,nocategory.168,52.10 Human resources management and services
+169,nocategory.169,52.11 International business/trade/commerce
+164,nocategory.164,52.06 Business/managerial economics
+165,nocategory.165,52.07 Entrepreneurial and small business operations
+166,nocategory.166,52.08 Finance and financial management services
+167,nocategory.167,52.09 Hospitality administration/management
+160,nocategory.160,"52.02 Business administration, management and operations"
+161,nocategory.161,52.03 Accounting and related services
+162,nocategory.162,52.04 Business operations support and assistant services
+163,nocategory.163,52.05 Business/corporate communications
+9,nocategory.9,13.05 Educational/instructional media design
+357,nocategory.357,03.03 Fishing and fisheries sciences and management
+356,nocategory.356,03.02 Natural resources management and policy
+355,nocategory.355,03.01 Natural resources conservation and research
+354,nocategory.354,03. Natural resources and conservation
+353,nocategory.353,"01.99 Agriculture, agriculture operations and related sciences, other"
+352,nocategory.352,01.12 Soil sciences
+351,nocategory.351,01.11 Plant sciences
+350,nocategory.350,01.10 Food science and technology
+359,nocategory.359,03.06 Wildlife and wildlands science and management
+358,nocategory.358,03.05 Forestry
+216,nocategory.216,41.03 Physical science technologies/technicians
+217,nocategory.217,"41.99 Science technologies/technicians, other"
+214,nocategory.214,41.01 Biology technician/biotechnology laboratory technician
+215,nocategory.215,41.02 Nuclear and industrial radiologic technologies/technicians
+212,nocategory.212,41. Science technologies/technicians
+213,nocategory.213,"41.00 Science technologies/technicians, general"
+210,nocategory.210,40.10 Materials sciences
+211,nocategory.211,"40.99 Physical sciences, other"
+218,nocategory.218,"Mathematics, computer and information sciences"
+219,nocategory.219,11. Computer and information sciences and support services
+289,nocategory.289,"14.42 Mechatronics, robotics, and automation engineering"
+288,nocategory.288,14.41 Electromechanical engineering
+4,nocategory.4,13. Education
+281,nocategory.281,14.34 Forest engineering
+280,nocategory.280,14.33 Construction engineering
+283,nocategory.283,14.36 Manufacturing engineering
+282,nocategory.282,14.35 Industrial engineering
+285,nocategory.285,14.38 Surveying engineering
+284,nocategory.284,14.37 Operations research
+287,nocategory.287,14.40 Paper science and engineering
+286,nocategory.286,14.39 Geological/geophysical engineering
+263,nocategory.263,14.09 Computer engineering
+262,nocategory.262,14.08 Civil engineering
+261,nocategory.261,14.07 Chemical engineering
+260,nocategory.260,14.06 Ceramic sciences and engineering
+267,nocategory.267,14.13 Engineering science
+266,nocategory.266,14.12 Engineering physics/applied physics
+265,nocategory.265,14.11 Engineering mechanics
+264,nocategory.264,"14.10 Electrical, electronics and communications engineering"
+269,nocategory.269,14.18 Materials engineering
+268,nocategory.268,14.14 Environmental/environmental health engineering
+59,nocategory.59,23.13 English rhetoric and composition/writing studies
+58,nocategory.58,"23.01 English language and literature, general"
+55,nocategory.55,16.17 Second language learning
+54,nocategory.54,16.16 Sign language
+57,nocategory.57,23. English language and literature/letters
+56,nocategory.56,"16.99 Aboriginal and foreign languages, literatures and linguistics, other"
+51,nocategory.51,"16.13 Celtic languages, literatures and linguistics"
+50,nocategory.50,"16.12 Classics and classical languages, literatures and linguistics"
+53,nocategory.53,"16.15 Turkic, Uralic-Altaic, Caucasian and Central Asian languages, literatures and linguistics"
+52,nocategory.52,"16.14 Southeast Asian and Australasian/Pacific languages, literatures and linguistics"
+63,nocategory.63,"24.01 Liberal arts and sciences, general studies and humanities"
+115,nocategory.115,"22.99 Legal professions and studies, other"
+114,nocategory.114,22.03 Legal support services
+117,nocategory.117,30.10 Biopsychology
+116,nocategory.116,30.05 Peace studies and conflict resolution
+111,nocategory.111,22.00 Non-professional general legal studies (undergraduate)
+110,nocategory.110,22. Legal professions and studies
+113,nocategory.113,22.02 Legal research and advanced professional studies (post-LLB/JD)
+112,nocategory.112,"22.01 Law (LLB, JD, BCL)"
+119,nocategory.119,30.14 Museology/museum studies
+118,nocategory.118,30.11 Gerontology
+429,nocategory.429,49.03 Marine transportation
+428,nocategory.428,49.02 Ground transportation
+421,nocategory.421,43. Security and protective services
+420,nocategory.420,29.05 Military technologies and applied sciences
+423,nocategory.423,43.02 Fire protection
+422,nocategory.422,43.01 Criminal justice and corrections
+425,nocategory.425,"43.99 Security and protective services, other"
+424,nocategory.424,"43.03 Security and protective services, specialized programs"
+427,nocategory.427,49.01 Air transportation
+426,nocategory.426,49. Transportation and materials moving
+308,nocategory.308,15.13 Drafting/design engineering technologies/technicians
+309,nocategory.309,15.14 Nuclear engineering technology/technician
+300,nocategory.300,15.05 Environmental control technologies/technicians
+301,nocategory.301,15.06 Industrial production technologies/technicians
+302,nocategory.302,15.07 Quality control and safety technologies/technicians
+303,nocategory.303,15.08 Mechanical engineering related technologies/technicians
+304,nocategory.304,15.09 Mining and petroleum technologies/technicians
+305,nocategory.305,15.10 Construction engineering technology/technician
+306,nocategory.306,15.11 Engineering-related technologies
+307,nocategory.307,15.12 Computer engineering technologies/technicians
+229,nocategory.229,11.10 Computer/information technology administration and management
+228,nocategory.228,11.09 Computer systems networking and telecommunications
+227,nocategory.227,11.08 Computer software and media applications
+226,nocategory.226,11.07 Computer science
+225,nocategory.225,11.06 Data entry/microcomputer applications
+224,nocategory.224,11.05 Computer systems analysis/analyst
+223,nocategory.223,11.04 Information science/studies
+222,nocategory.222,11.03 Data processing and data processing technology/technician
+221,nocategory.221,11.02 Computer programming
+220,nocategory.220,"11.01 Computer and information sciences and support services, general"
+391,nocategory.391,"51.25 Veterinary biomedical and clinical sciences (Cert., MS, MSc, PhD)"
+390,nocategory.390,51.24 Veterinary medicine (DVM)
+151,nocategory.151,44. Public administration and social service professions
+150,nocategory.150,30.16 Accounting and computer science
+153,nocategory.153,44.02 Community organization and advocacy
+152,nocategory.152,"44.00 Human services, general"
+155,nocategory.155,44.05 Public policy analysis
+154,nocategory.154,44.04 Public administration
+157,nocategory.157,"44.99 Public administration and social service professions, other"
+156,nocategory.156,44.07 Social work
+159,nocategory.159,"52.01 Business/commerce, general"
+158,nocategory.158,"52. Business, management, marketing and related support services"
+399,nocategory.399,51.36 Movement and mind-body therapies
+398,nocategory.398,51.35 Somatic bodywork and related therapeutic services
+48,nocategory.48,"16.10 Aboriginal languages, literatures and linguistics"
+49,nocategory.49,"16.11 Middle/Near Eastern and Semitic languages, literatures and linguistics"
+46,nocategory.46,"16.08 Iranian languages, literatures and linguistics"
+47,nocategory.47,"16.09 Romance languages, literatures and linguistics"
+44,nocategory.44,16.06 Modern Greek language and literature
+45,nocategory.45,"16.07 South Asian languages, literatures and linguistics"
+42,nocategory.42,"16.04 Slavic, Baltic and Albanian languages, literatures and linguistics"
+43,nocategory.43,"16.05 Germanic languages, literatures and linguistics"
+40,nocategory.40,"16.02 African languages, literatures and linguistics"
+41,nocategory.41,"16.03 East Asian languages, literatures and linguistics"
+5,nocategory.5,"13.01 Education, general"
