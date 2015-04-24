@@ -6,9 +6,6 @@
   hosts: webservers
   roles:
     - bennojoy.nginx
-    - ANXS.postgresql
-    - postgresql-tables
-    - pip-requirements
-    - app
+    - angstwad.docker_ubuntu
 
   sudo: True
