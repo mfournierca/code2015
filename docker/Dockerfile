@@ -11,6 +11,6 @@ RUN R -e "install.packages(c('ggplot2', 'shiny', 'dplyr', 'ggplot-themes'), repo
 RUN git clone --recursive http://github.com/mfournierca/code2015.git /usr/local/code2015
 RUN cd /usr/local/code2015 && git fetch origin docker && git checkout docker
 
-EXPOSE 3729
+EXPOSE 5000
 
-RUN R -e "shiny::runApp('/usr/local/code2015/shiny', port=3729)"
+RUN R -e "shiny::runApp('/usr/local/code2015/shiny', port=5000)"
