@@ -2,7 +2,6 @@ library(shiny)
 library(dplyr)
 library(ggplot2)
 library(grid)
-library(ggthemes)
 
 # read data
 cipdf <- read.csv("data/cip_mapping.csv")
@@ -55,7 +54,6 @@ function(input, output) {
         geom_bar(stat="identity") +
         xlab("") + 
         ylab("") + 
-        theme_economist() + 
         theme(
             axis.text.x=element_text(angle=45, hjust=1), 
             plot.margin=unit(c(0, 0, 0, 0), "cm")
