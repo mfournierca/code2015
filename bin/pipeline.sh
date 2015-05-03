@@ -22,8 +22,8 @@ echo building category and CIP mapping
 PYTHONPATH=.. python ../src/data_processing/build_legend.py $DATA_ARCHIVE $CATEGORY_MAP_JSON_PATH $CIP_MAP_CSV_PATH $NOC_MAP_CSV_PATH
 
 # parse raw data
-# echo preparing data
-# PYTHONPATH=.. python ../src/data_process/dump_raw_data.py $DATA_ARCHIVE $CATEGORY_MAP_JSON_PATH $PROCESSED_DATA_PATH
+echo preparing data
+PYTHONPATH=.. python ../src/data_process/dump_raw_data.py $DATA_ARCHIVE $CATEGORY_MAP_JSON_PATH $PROCESSED_DATA_PATH
 
 # copy into shiny dir
 
