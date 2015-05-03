@@ -1,2 +1,0 @@
-- exclude everything except category4 cip from data dump
-
