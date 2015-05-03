@@ -5,7 +5,15 @@ nginx_sites:
       server_name: "{{ nginx_server_name }}"
       location1:
         name: "/"
-        proxy_pass: http://localhost:5000
+        proxy_pass: http://127.0.0.1:5000
+        include: /etc/nginx/proxy_params
+      location2:
+            name: "/websocket"
+            proxy_pass: http://127.0.0.1:5000/websocket
+            proxy_http_version: 1.1
+            proxy_set_header: "Upgrade $http_upgrade"
+            proxy_set_header: 'Connection "upgrade"'
+         
 # git
 git_repo: https://github.com/mfournierca/code2015.git
 git_branch: master
