@@ -197,7 +197,7 @@ def run(zip_path, category_mapping_json, cip_mapping_csv):
 if __name__ == "__main__":
     args = docopt(__doc__)
     run(
-        args["<zip_path>"],
+        args["<data_zip>"],
         args["<category_map_json>"], 
         args["<cip_map_csv>"]
     )

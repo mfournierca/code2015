@@ -1,4 +1,5 @@
 import re
+import zipfile 
 
 def extract_category_name_id(name):
     if not name:
@@ -10,5 +11,5 @@ def extract_category_name_id(name):
 
 
 def get_input_from_zip(archive_path, zip_path):
-    z = zipfile.ZipFile(data_zip, "r")
+    z = zipfile.ZipFile(archive_path, "r")
     return z.open(zip_path)
