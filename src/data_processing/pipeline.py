@@ -1,8 +1,8 @@
 """Run the data processing pipeline. 
 
 This script runs through the data processing pipeline from downloading the 
-raw data, through preprocessing, cleaning, etc and ends with the data loaded
-into a data base ready for use by an application. 
+raw data, through preprocessing, cleaning, etc and ends with the data copied
+into the shiny/ dir ready for use by an application.
 
 Usage: 
 
@@ -21,6 +21,14 @@ import dump_raw_data
 import build_legend
 
 def run(data_source_url):
+    # download
+
+    # generate category mapping, legend
+
+    # parse data
+    
+    # output to shiny dir
+
     pass
 
 
