@@ -20,13 +20,13 @@ from lxml import etree
 import resource
 import csv
 import psycopg2
-import zipfile
 import datetime
 import re
 import json
 
 from src.constants import NAMESPACES, ZIP_DATA_PATH
 from src.db import get_cursor, insert_dict
+from src.common import get_input_from_zip
 
 SERIES_TAG = "{%s}Series" % NAMESPACES["generic"]
 VALUE_TAG = "{%s}Value" % NAMESPACES["generic"]
@@ -138,22 +138,17 @@ def generate_raw_data(
 
 
 def get_fieldnames(input_file, category_mapping): 
-    input_handle = get_input_from_zip(input_file)
+    input_handle = get_input_from_zip(input_file, ZIP_DATA_PATH)
     g = generate_raw_data(
         input_handle, limit=1, category_mapping=category_mapping)
     k = g.next().keys()
     return k
 
 
-def get_input_from_zip(archive_path):
-    z = zipfile.ZipFile(archive_path, "r")
-    return z.open(ZIP_DATA_PATH)
-
-
 def run_csv(input_file, category_file, output_file, limit=None):
     category_mapping = json.loads("".join(open(category_file, "r")))   
     
-    input_handle = get_input_from_zip(input_file) 
+    input_handle = get_input_from_zip(input_file, ZIP_DATA_PATH) 
     
     fieldnames = get_fieldnames(input_file, category_mapping) 
     output_handle = open(output_file, "w")
@@ -172,7 +167,7 @@ def run_csv(input_file, category_file, output_file, limit=None):
 def run_postgresql(input_file, category_file, limit=None):
     category_mapping = json.loads("".join(open(category_file, "r")))   
     
-    with get_input_from_zip(input_file) as input_handle:
+    with get_input_from_zip(input_file, ZIP_DATA_PATH) as input_handle:
         cur = get_cursor()
         g = generate_raw_data(
             input_handle, limit=limit, category_mapping=category_mapping)

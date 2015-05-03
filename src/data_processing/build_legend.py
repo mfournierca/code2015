@@ -4,16 +4,16 @@ The legend is a dictionary. The dictionary maps between the different id values
 found in the data set and their plain-text equivalent.
 
 Usage:
-    build_legend.py <structure_file> <category_map_json> <cip_map_csv> [options]
+    build_legend.py <data_zip> <category_map_json> <cip_map_csv> [options]
 
 Arguments:
-    <structure_file>  structure file that came with the dataset
-    <category_map_json>  output file for the category mapping, a dictionary
+    <data_zip>           The data set zip file
+    <category_map_json>  Output file for the category mapping, a dictionary
                          mapping category keys to ids
-    <cip_map_csv>        output file for the CIP category mapping, a csv 
+    <cip_map_csv>        Output file for the CIP category mapping, a csv 
                          containing the category name and id of each field
                          of education
-    --help            show this help page
+    --help               Show this help page
 """
 
 from lxml import etree
@@ -23,8 +23,8 @@ from collections import defaultdict
 import csv
 import json
 
-from src.constants import NAMESPACES
-from src.common import extract_category_name_id
+from src.constants import NAMESPACES, ZIP_STRUCTURE_PATH
+from src.common import extract_category_name_id, get_input_from_zip
 
 
 TAG_MAPPING = {
@@ -188,7 +188,8 @@ def run_document(
         f.writerow(d)
 
 
-def run(input_file, category_mapping_json, cip_mapping_csv): 
+def run(zip_path, category_mapping_json, cip_mapping_csv): 
+    input_file = get_input_from_zip(zip_path, ZIP_STRUCTURE_PATH)
     doc = etree.parse(input_file) 
     run_document(doc, category_mapping_json, cip_mapping_csv)
 
@@ -196,7 +197,7 @@ def run(input_file, category_mapping_json, cip_mapping_csv):
 if __name__ == "__main__":
     args = docopt(__doc__)
     run(
-        args["<structure_file>"],
+        args["<zip_path>"],
         args["<category_map_json>"], 
         args["<cip_map_csv>"]
     )
