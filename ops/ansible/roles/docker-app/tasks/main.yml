@@ -6,3 +6,4 @@
   docker: 
     image: mfournierca/code2015
     state: running
+    ports: 5000:5000
