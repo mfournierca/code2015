@@ -23,7 +23,7 @@ PYTHONPATH=.. python ../src/data_processing/build_legend.py $DATA_ARCHIVE $CATEG
 
 # parse raw data
 echo preparing data
-PYTHONPATH=.. python ../src/data_processing/dump_raw_data.py $DATA_ARCHIVE $CATEGORY_MAP_JSON_PATH $PROCESSED_DATA_PATH
+PYTHONPATH=.. python ../src/data_processing/dump_raw_data.py csv $DATA_ARCHIVE $CATEGORY_MAP_JSON_PATH $PROCESSED_DATA_PATH
 
 # copy into shiny dir
 
