@@ -4,7 +4,7 @@ The legend is a dictionary. The dictionary maps between the different id values
 found in the data set and their plain-text equivalent.
 
 Usage:
-    build_legend.py <data_zip> <category_map_json> <cip_map_csv> [options]
+    build_legend.py <data_zip> <category_map_json> <cip_map_csv> <noc_map_csv> [options]
 
 Arguments:
     <data_zip>           The data set zip file
@@ -13,6 +13,9 @@ Arguments:
     <cip_map_csv>        Output file for the CIP category mapping, a csv 
                          containing the category name and id of each field
                          of education
+    <noc_map_csv>        Output file for the NOC category mapping, a csv
+                         containing the category name and id of each
+                         occupation
     --help               Show this help page
 """
 
@@ -168,10 +171,24 @@ def parse_full_category_mapping(d):
     return category_mapping
 
 
+def _write_mapping(mapping, output_csv):
+    fieldnames = ["category_key", "category_id", "category_name"]
+    with open(output_csv, "w") as c: 
+        f = csv.DictWriter(c, fieldnames)
+        f.writeheader() 
+        for n, d in mapping.iteritems():            
+            d = {
+                k: v.encode("utf-8") for k, v in d.items() if k != "subcategories"
+            }
+            d["category_key"] = n
+            f.writerow(d)
+    
+
 def run_document(
         document, 
         category_mapping_json, 
-        cip_mapping_csv
+        cip_mapping_csv, 
+        noc_mapping_csv
     ):
     
     category_mapping = parse_full_category_mapping(document)
@@ -179,19 +196,16 @@ def run_document(
         f.write(json.dumps(category_mapping, indent=2))
    
     cip_mapping = category_mapping["CIP2011_4"]
-    fieldnames = ["category_key", "category_id", "category_name"]
-    f = csv.DictWriter(open(cip_mapping_csv, "w"), fieldnames)
-    f.writeheader() 
-    for n, d in cip_mapping.iteritems():            
-        d = {k: v.encode("utf-8") for k, v in d.items() if k != "subcategories"}
-        d["category_key"] = n
-        f.writerow(d)
+    _write_mapping(cip_mapping, cip_mapping_csv)
+
+    noc_mapping = category_mapping["NOC2011"]
+    _write_mapping(noc_mapping, noc_mapping_csv)
 
 
-def run(zip_path, category_mapping_json, cip_mapping_csv): 
+def run(zip_path, category_mapping_json, cip_mapping_csv, noc_mapping_csv): 
     input_file = get_input_from_zip(zip_path, ZIP_STRUCTURE_PATH)
     doc = etree.parse(input_file) 
-    run_document(doc, category_mapping_json, cip_mapping_csv)
+    run_document(doc, category_mapping_json, cip_mapping_csv, noc_mapping_csv)
 
 
 if __name__ == "__main__":
@@ -199,5 +213,6 @@ if __name__ == "__main__":
     run(
         args["<data_zip>"],
         args["<category_map_json>"], 
-        args["<cip_map_csv>"]
+        args["<cip_map_csv>"], 
+        args["<noc_map_csv>"]
     )
