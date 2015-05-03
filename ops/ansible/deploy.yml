@@ -2,10 +2,15 @@
 
 - include: ../ansible-common/deploy-base-server.yml
 
-- name: deploying app
+- name: deploying dependancies
   hosts: webservers
   roles:
     - bennojoy.nginx
     - angstwad.docker_ubuntu
+  sudo: True
 
+- name: deploy app
+  hosts: webservers
+  roles:
+    - docker-app 
   sudo: True

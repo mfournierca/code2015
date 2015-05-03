@@ -7,7 +7,7 @@ VAGRANTFILE_API_VERSION = "2"
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   
     config.vm.define "vagrant.code2015.mfournier.ca" do |db|
-        db.vm.box = "hashicorp/precise32"
+        db.vm.box = "ubuntu/trusty64"
         db.vm.network :private_network, ip: "192.168.33.10"
    
         # Use the vagrants-hostsupdater plugin to add this machine to the host 
