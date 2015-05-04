@@ -13,6 +13,13 @@ RUN R -e "install.packages('shiny', repos='http://cran.us.r-project.org')"
 RUN git clone --recursive http://github.com/mfournierca/code2015.git /usr/local/code2015
 RUN cd /usr/local/code2015 && git fetch origin master && git checkout master
 
-EXPOSE 5000
+# copy datafiles
+RUN mkdir -p /usr/local/code2015/data
+COPY dump.csv /usr/local/code2015/data/dump.csv
+COPY category_mapping.json /usr/local/code2015/data/category_mapping.json
+COPY cip_mapping.csv /usr/local/code2015/data/cip_mapping.csv
+COPY noc_mapping.csv /usr/local/code2015/data/noc_mapping.csv
 
+# expose necessary ports and run
+EXPOSE 5000
 CMD ["R", "-e", "shiny::runApp('/usr/local/code2015/shiny', port=5000, host='0.0.0.0')"]

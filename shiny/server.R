@@ -4,9 +4,9 @@ library(ggplot2)
 library(grid)
 
 # read data
-cipdf <- read.csv("data/cip_mapping.csv")
-nocdf <- read.csv("data/noc_mapping.csv")
-datadf <- read.csv("data/dump.csv")
+cipdf <- read.csv("/usr/local/code2015/data/cip_mapping.csv")
+nocdf <- read.csv("/usr/local/code2015/data/noc_mapping.csv")
+datadf <- read.csv("/usr/local/code2015/data/dump.csv")
 
 # set column name
 colnames(nocdf)[which(names(nocdf) == "category_key")] <- "NOC2011"
