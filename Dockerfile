@@ -11,7 +11,7 @@ RUN R -e "install.packages('shiny', repos='http://cran.us.r-project.org')"
 
 # install the application
 RUN git clone --recursive http://github.com/mfournierca/code2015.git /usr/local/code2015
-RUN cd /usr/local/code2015 && git fetch origin docker && git checkout docker
+RUN cd /usr/local/code2015 && git fetch origin master && git checkout master
 
 EXPOSE 5000
 

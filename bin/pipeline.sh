@@ -25,8 +25,6 @@ PYTHONPATH=.. python ../src/data_processing/build_legend.py $DATA_ARCHIVE $CATEG
 echo preparing data
 PYTHONPATH=.. python ../src/data_processing/dump_raw_data.py csv $DATA_ARCHIVE $CATEGORY_MAP_JSON_PATH $PROCESSED_DATA_PATH
 
-# copy into shiny dir
-
-
 # build and upload docker app
-
+docker build -t mfournierca/code2015 ..
+docker push mfournierca/code2015
