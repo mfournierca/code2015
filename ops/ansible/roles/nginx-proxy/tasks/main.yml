@@ -1,0 +1,11 @@
+--- 
+
+- name: copy the nginx config template
+  template: src=nginx_template dest=/etc/nginx/sites-available/{{ nginx_server_name }}
+
+- name: create the symlink to enable the nginx config
+  file: path=/etc/nginx/sites-enabled/{{ nginx_server_name }} src=/etc/nginx/sites-available/{{ nginx_server_name }} state=link
+
+# should use notify
+- name: restart nginx
+  service: name=nginx state=restarted

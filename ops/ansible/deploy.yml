@@ -12,5 +12,6 @@
 - name: deploy app
   hosts: webservers
   roles:
+    - nginx-proxy
     - docker-app 
   sudo: True
