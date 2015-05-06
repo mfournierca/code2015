@@ -2,6 +2,9 @@
 - name: workaround - install docker-py v1.1.0
   pip: name=docker-py version=1.1.0
 
+- name: ensure docker daemon is started
+  service: name=docker state=started
+
 - name: pull docker image
   docker: 
     image: mfournierca/code2015
