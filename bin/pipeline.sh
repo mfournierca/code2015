@@ -6,14 +6,14 @@
 
 DATA_SOURCE_URL="http://www12.statcan.gc.ca/open-gc-ouvert/?CTLG=99-012-X2011056"
 DATA_DIR="../data/"
-DOCKER_DIR="../docker"
-DATA_ARCHIVE=$DATA_DIR"data.zip"
+DATA_ARCHIVE=$DATA_DIR"/source/data.zip"
 
-CATEGORY_MAP_JSON_PATH=$DOCKER_DIR"category_mapping.json"
-CIP_MAP_CSV_PATH=$DOCKER_DIR"cip_mapping.csv"
-NOC_MAP_CSV_PATH=$DOCKER_DIR"noc_mapping.csv"
-PROCESSED_DATA_PATH=$DOCKER_DIR"dump.csv"
-mkdir $DATA_DIR
+CATEGORY_MAP_JSON_PATH=$DATA_DIR"category_mapping.json"
+CIP_MAP_CSV_PATH=$DATA_DIR"cip_mapping.csv"
+NOC_MAP_CSV_PATH=$DATA_DIR"noc_mapping.csv"
+PROCESSED_DATA_PATH=$DATA_DIR"dump.csv"
+
+mkdir -p `dirname $DATA_ARCHIVE`
 
 # download source data
 wget --continue -O $DATA_ARCHIVE $DATA_SOURCE_URL
