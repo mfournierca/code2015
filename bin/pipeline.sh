@@ -28,7 +28,7 @@ PYTHONPATH=.. python $SRC_DIR"data_processing/build_legend.py" $DATA_ARCHIVE $CA
 
 # parse raw data
 echo preparing data
-#PYTHONPATH=.. python $SRC_DIR"data_processing/dump_raw_data.py" csv $DATA_ARCHIVE $CATEGORY_MAP_JSON_PATH $PROCESSED_DATA_PATH
+PYTHONPATH=.. python $SRC_DIR"data_processing/dump_raw_data.py" csv $DATA_ARCHIVE $CATEGORY_MAP_JSON_PATH $PROCESSED_DATA_PATH
 
 # build and upload docker app
 docker build -t mfournierca/code2015 $BIN_DIR"../"
