@@ -15,10 +15,10 @@ RUN cd /usr/local/code2015 && git fetch origin master && git checkout master
 
 # copy datafiles
 RUN mkdir -p /usr/local/code2015/data
-COPY dump.csv /usr/local/code2015/data/dump.csv
-COPY category_mapping.json /usr/local/code2015/data/category_mapping.json
-COPY cip_mapping.csv /usr/local/code2015/data/cip_mapping.csv
-COPY noc_mapping.csv /usr/local/code2015/data/noc_mapping.csv
+COPY data/dump.csv /usr/local/code2015/data/dump.csv
+COPY data/category_mapping.json /usr/local/code2015/data/category_mapping.json
+COPY data/cip_mapping.csv /usr/local/code2015/data/cip_mapping.csv
+COPY data/noc_mapping.csv /usr/local/code2015/data/noc_mapping.csv
 
 # expose necessary ports and run
 EXPOSE 5000
