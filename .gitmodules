@@ -1,3 +1,3 @@
 [submodule "ops/ansible-common"]
 	path = ops/ansible-common
-	url = https://mfournierca:1lariaIlaria@bitbucket.org/mfournierca/ansible-common
+	url = https://github.com/mfournierca/ansible-common
