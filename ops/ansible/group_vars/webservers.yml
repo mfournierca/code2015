@@ -1,3 +1,4 @@
+# bennojoy.nginx options
 nginx_sites:
   - server:
       file_name: "{{ nginx_server_name }}"
@@ -13,8 +14,8 @@ nginx_sites:
             proxy_http_version: 1.1
             proxy_set_header: "Upgrade $http_upgrade"
             proxy_set_header: 'Connection "upgrade"'
-         
-# git
-git_repo: https://github.com/mfournierca/code2015.git
-git_branch: master
+      
+# angstwad.docker_ubuntu options
+docker_opts: >
+  --iptables=true
 
