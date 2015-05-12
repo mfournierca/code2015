@@ -31,6 +31,12 @@ fluidPage(
                         <li>Data is aggregated across all age groups, provinces and census divisions.</li>
                         <li>Some data is excluded due to quality issues, privacy rules imposed on Statistics Canada, or non-response on the census.</li>
                     </ul>"
+                ),
+                # links
+                HTML('
+                    <p>Code can be found <a href="https://github.com/mfournierca/code2015">here</a>.</p>
+                    <p>More details can be found <a href="http://mfournier.ca/blog/2015/05/10/occupations-by-education/">here</a>.</p>'
+                
                 )
             ),
 
