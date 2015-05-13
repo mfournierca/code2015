@@ -8,7 +8,9 @@ cip <- cip[grep("^[1234567890]", cip$category_name), ]
 fluidPage(      
     
     # Give the page a title
-    titlePanel("Employment Categories by Education"),
+    titlePanel("Occupations"),
+    hr(),
+    br(),
     fluidRow( 
         # Generate a row with a sidebar
         sidebarLayout(      
@@ -21,6 +23,7 @@ fluidPage(
                     choices=as.vector(cip$category_name),
                     width="100%",
                 ), 
+                br(),
                 helpText("This tool generates a graph of where people with a given education are employed. The graph is ranked by number of people in each job, so the most popular / likely occupations are first."),
                 # caveats / notes
                 HTML("
